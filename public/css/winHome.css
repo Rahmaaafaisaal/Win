@@ -1,0 +1,101 @@
+.homeNav{
+   background-image: url("/bk.png");
+   background-repeat: no-repeat;
+   background-size: cover;
+    border-bottom-left-radius: 0.5vw;
+    border-bottom-right-radius: 0.5vw;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    
+    margin-top: 10vw;
+  }
+
+.imgMain{
+    margin-left: 6vw;
+    width: 40vw;
+    height: 25vw;
+    border-radius: 0.3vw;
+}
+
+.sectionMain{
+    margin-left: 2vw;
+
+}
+.sectionMain h5{
+font-style: italic;
+font-weight: bold;
+font-size: 1.5vw;
+}
+.sectionMain p{
+    margin-left: 4vw;
+}
+
+.buttons{
+    border-color: beige;
+    background-color: transparent;
+    color: beige;
+    width: 5.5vw;
+    height: 2.5vw;
+    font-size: 1vw;
+    padding: 0;
+}
+.buttons:active{
+    border-color: beige;
+    color: beige;
+}
+.buttons:hover{
+    color: beige;
+}
+
+.buttons:active {
+    outline: none;
+    border: none;
+}
+
+.titleSty{
+    color: beige;
+    font-size: 1.5vw;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: 5vw;
+
+}
+
+
+.navbar-brand:hover{
+    color: beige;
+}
+
+
+.registrDiv{
+    display: none;
+    margin-left: 5vw;
+    margin-top: 5vw;
+}
+
+.register{
+margin-top: 3vw;
+margin-left: 2vw;
+
+
+}
+.fieldset {
+    display: block;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 0.5px solid  ;
+    border-color: black;
+    height:100%;
+  }
+  .fieldset legend{
+      overflow: hidden;
+      width: auto;
+      margin-top: 0;
+  }
