@@ -1,0 +1,13 @@
+#errorMsg {
+    display: none;
+    color: red;
+}
+
+#roomPrice_r {
+    width : 12%;
+}
+
+#roomPriceErrorMsg {
+    display: none;
+    color: red;
+}

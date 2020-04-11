@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>renter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/renter.css">
+    
+</head>
+<body>
+    
+    <!-- beginning of room Info Div -->
+    <!-- _r for renter  -->
+    <div id="roomForumDiv_r"  role="dialog" aria-labelledby="exampleModalCenterTitle" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Enter Room Information</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span >&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h5>Location</h5>
+                <select id="roomLoc_r">
+                    <option value="-1">Choose Room Location</option>
+                </select>
+               
+                <h5>Price</h5>
+                <input type="text" id="roomPrice_r">
+                <p style="display:inline" >EGP</p>
+                <p id="roomPriceErrorMsg" >Please Enter a valid price</p>
+                <h5>Type</h5>
+                <select id="roomType_r">
+                    <option value="-1">Choose Room Type</option>
+                </select>
+
+                <h5>Gender</h5>
+                <select id="roomGender_r">
+                    <option value="-1">Choose Gender</option>
+                </select> 
+            
+<!--            <h5>Upload Image</h5>
+                <input type="file" id="roomPhoto_r">
+                <input type="button" id="uploadBtnRoomImage" value="Upload"> -->
+           </div>
+            <div class="modal-footer">
+                <span id="errorMsg" class="bookFullData">Please fill all the data</span>
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="button" id="addingNewBookBtn" class="btn btn-primary">Add Room</button>
+            </div>
+          </div>
+        </div>
+      </div>    
+      <!-- End of room Info Div -->
+
+  
+    <script src='../js/renter.js'></script>
+</body>
+</html>
