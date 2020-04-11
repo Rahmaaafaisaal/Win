@@ -1,27 +1,30 @@
 .homeNav{
-   background-image: url("/bk.png");
-   background-repeat: no-repeat;
-   background-size: cover;
+    background-image: url("../img/bk.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     border-bottom-left-radius: 0.5vw;
     border-bottom-right-radius: 0.5vw;
 }
+.bk{
+    background-image: url('../img/images.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 
+}
 .flex-container {
     display: flex;
     flex-flow: row wrap;
     
     margin-top: 10vw;
   }
-
 .imgMain{
     margin-left: 6vw;
     width: 40vw;
     height: 25vw;
     border-radius: 0.3vw;
 }
-
 .sectionMain{
-    margin-left: 2vw;
+    margin-left: 45vw;
 
 }
 .sectionMain h5{
@@ -31,8 +34,10 @@ font-size: 1.5vw;
 }
 .sectionMain p{
     margin-left: 4vw;
-}
+    margin-top: 2vw;
+    font-size: 1.5vw;
 
+}
 .buttons{
     border-color: beige;
     background-color: transparent;
@@ -63,23 +68,19 @@ font-size: 1.5vw;
     margin-left: 5vw;
 
 }
-
-
 .navbar-brand:hover{
     color: beige;
 }
-
-
 .registrDiv{
     display: none;
     margin-left: 5vw;
     margin-top: 5vw;
+    height: 35%;
 }
-
 .register{
 margin-top: 3vw;
 margin-left: 2vw;
-
+font-size: 1vw;
 
 }
 .fieldset {
@@ -98,4 +99,5 @@ margin-left: 2vw;
       overflow: hidden;
       width: auto;
       margin-top: 0;
+      font-size: 1.5vw;
   }
