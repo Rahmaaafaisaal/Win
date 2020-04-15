@@ -3,15 +3,18 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>renter</title>
+    <title>Win</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/renter.css">
+    <link rel="stylesheet" href="css/renter.css">
     
 </head>
 <body>
     
     <!-- beginning of room Info Div -->
     <!-- _r for renter  -->
+    <nav class="navbar homeNav">
+      <a class="navbar-brand titleSty" id="HomePage" href="#"> WIN</a>
+    </nav>
     <div id="roomForumDiv_r"  role="dialog" aria-labelledby="exampleModalCenterTitle" >
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -28,7 +31,7 @@
                 </select>
                
                 <h5>Price</h5>
-                <input type="text" id="roomPrice_r">
+                <input type="number"  id="roomPrice_r">
                 <p style="display:inline" >EGP</p>
                 <p id="roomPriceErrorMsg" >Please Enter a valid price</p>
                 <h5>Type</h5>
@@ -56,6 +59,6 @@
       <!-- End of room Info Div -->
 
   
-    <script src='../js/renter.js'></script>
+    <script src='js/renter.js'></script>
 </body>
 </html>

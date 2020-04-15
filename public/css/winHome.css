@@ -7,14 +7,15 @@
 }
 .bk{
     background-image: url('../img/images.png');
-    background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+ 
 
 }
 .flex-container {
     display: flex;
-    flex-flow: row wrap;
-    
+    flex-flow: row wrap;  
     margin-top: 10vw;
   }
 .imgMain{
@@ -30,12 +31,12 @@
 .sectionMain h5{
 font-style: italic;
 font-weight: bold;
-font-size: 1.5vw;
+font-size:0.9em;
 }
 .sectionMain p{
     margin-left: 4vw;
     margin-top: 2vw;
-    font-size: 1.5vw;
+    font-size:0.9em;
 
 }
 .buttons{
@@ -71,33 +72,95 @@ font-size: 1.5vw;
 .navbar-brand:hover{
     color: beige;
 }
-.registrDiv{
-    display: none;
-    margin-left: 5vw;
-    margin-top: 5vw;
-    height: 35%;
-}
-.register{
-margin-top: 3vw;
-margin-left: 2vw;
-font-size: 1vw;
 
-}
 .fieldset {
-    display: block;
+   
     margin-left: 1vw;
     margin-right: 1vw;
     padding-top: 0.35em;
     padding-bottom: 0.625em;
     padding-left: 0.75em;
-    padding-right: 0.75em;
     border: 0.5px solid  ;
     border-color: black;
     height:100%;
+    width: 85%;
   }
   .fieldset legend{
       overflow: hidden;
       width: auto;
       margin-top: 0;
-      font-size: 1.5vw;
+      font-size:1em;
   }
+
+
+#addMember{
+    width: 50%;
+ 
+    font-size: 1em;
+    background-color: rgb(28, 16, 109);
+    color: beige;
+    margin-left: 40%;
+    margin-top: 5%;
+    
+}
+
+
+
+#login{
+    display: none;
+}
+
+#login{
+    color: rgb(28, 16, 109);
+}
+#login .container .login-row #login-column #login-box {
+    margin: auto;
+    margin-top:10%;
+    max-width: 80%;
+    height: 320px;
+    border: 1px solid  rgb(28, 16, 109);
+    border-radius: 3px;
+    background-color:transparent;
+  }
+  #login .container .login-row #login-column #login-box #login-form {
+    padding: 20px;
+  }
+  #login .container .login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+  }
+
+  #login button{
+      background-color: rgb(28, 16, 109);
+      color: beige;
+     margin-left: 15%;
+      width: 70%;
+      font-size: 1em;
+  }
+
+  #registrationDiv .container .login-row #login-column #login-box {
+    margin: auto;
+    margin-top:10%;
+    max-width: 80%;
+    height: 320px;
+    border: 1px solid  rgb(28, 16, 109);
+    border-radius: 3px;
+    background-color:transparent;
+  }
+
+  #registrationDiv{
+      display: none;
+      margin-top: 3%;
+      
+  }
+
+  #registrationDiv    .form-control{
+      width: 70%;
+      margin-left: 10%;
+  }
+
+  #registrationDiv    .form-group{
+ float: left;
+ height: 60px;
+ width: 50%;
+ font-size: 80%;
+}

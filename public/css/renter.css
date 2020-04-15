@@ -11,3 +11,28 @@
     display: none;
     color: red;
 }
+#roomForumDiv_r{
+    margin-top: 0%;
+}
+
+
+.homeNav{
+    background-image: url("../img/bk.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-bottom-left-radius: 0.5vw;
+    border-bottom-right-radius: 0.5vw;
+}
+
+.titleSty{
+    color: beige;
+    font-size: 1.5vw;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: 5vw;
+
+}
+
+.navbar-brand:hover{
+    color: beige;
+}

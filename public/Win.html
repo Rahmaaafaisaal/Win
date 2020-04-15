@@ -1,79 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/ico" href="../img//Home-Icon.png" />
+    <link rel="icon" type="image/ico" href="/img//Home-Icon.png" />
     <title>Win</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/winHome.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/winHome.css">
 </head>
+
 <body class="bk">
 
-<!-- Image and text -->
-<nav class="navbar homeNav">
-    <a class="navbar-brand titleSty" id="HomePage" href="#"> WIN</a>
-    <div>
-    <button type="button" id="loginbtn" class="btn buttons"> <span>Login</span></button>
-    <button type="button" id="signInbtn" class="btn buttons"><span>Sign In </span> </button>
+    <!-- Image and text -->
+    <nav class="navbar homeNav">
+        <a class="navbar-brand titleSty" id="HomePage" href="#"> WIN</a>
+        <div>
+            <button type="button" id="loginbtn" class="btn buttons"> <span>Login</span></button>
+            <button type="button" id="signInbtn" class="btn buttons"><span>Sign In </span> </button>
+        </div>
+    </nav>
+
+
+    <div id="welcomeDiv" class="flex-container">
+        <section class="sectionMain">
+            <h5>Welcome In Homes</h5>
+            <p>Our website interduce you a solution for the students and workers lives in a city and their study or work
+                in Cairo, You can find a livable room with livable conditions you can live and focus on your study or
+                take a rest from your work and even to chill and have a quality time with yourself.
+                The rooms you find here interduce by home owners have the ability to rent the rooms for people have the
+                same mindset to find the comfortable point for all room tenants.
+            </p>
+        </section>
     </div>
-  </nav>
-
-<div id="welcomeDiv" class="flex-container">
-
-<section class="sectionMain">
-    <h5>Welcome In Homes</h5>
-    <p>Our website interduce you a solution for the students and workers lives in a city and their study or work in Cairo, You can find a livable room with livable conditions you can live and focus on your study or take a rest from your work and even to chill and have a quality time with yourself.
-        The rooms you find here interduce by home owners have the ability to rent the rooms for people have the same mindset  to find the comfortable point for all room tenants.</p>
-</section>
-</div>
-<div class="registrDiv" id="registrationDiv">
-    <h5>Join us  </h5>
-<form class="register">
-    <fieldset class="fieldset">
-        <legend> Information </legend>
-
-    <label >User Name </label>
-    <input required type="text"/>
-    <br>
-    <label >Phone Number </label>
-    <input  required type="number"/>
-    <br>
-
-    <label >E-mail </label>
-    <input required type="email"/>
-    <br>
-    <label >age </label>
-    <input  required type="number"/>
-    <br>
-    <label >Gender</label>
-    <input  type="radio" id="male" name="gender" value="male">
-    <label for="male">Male</label>
-    <input type="radio" id="female" name="gender" value="female">
-    <label for="female">Female</label>
-    <br>
-    <label >Are you </label>
-    <select id="role">
-        <option value="Buyer">Buyer</option>
-        <option value="Seller">Seller</option>
-      </select>
-      <br>
-      <label >Add your photo </label>
-      <input required type='file' />
-      <br>
-    <button type="submit">Create account</button>
-</fieldset>
-</form>
-
-</div>
 
 
+    <div class=" registrDiv container" id="registrationDiv">
+        <h5>Join us </h5>
+        <form class="row justify-content-center align-items-center login-row " name="signUp">
+            <fieldset class="fieldset">
+                <legend> Information </legend>
 
+                <section class="form-group">
 
-<!-- start of scripts -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="../js/winHome.js"></script>
+                    <label>User Name </label><span id="1" style="color: red;margin-left: 5%;display: none;">* This feild is required</span>
+                    <br>
+                    <input name="userName" class="form-control" required type="text" />
+
+                </section>
+                <section class="form-group">
+                    <label>Phone Number </label><span id="2"style="color: red;margin-left: 5%;display: none;">* This feild is required</span>
+                    <br>
+                    <input name="phoneNumber" class="form-control" required type="text" />
+                </section>
+                <section class="form-group">
+                    <label>E-mail </label><span id="3" style="color: red;margin-left: 5%;display: none;">* This feild is required</span> 
+                    <br>
+                    <input name="email" class="form-control" required type="email" />
+                </section>
+                <section class="form-group">
+                    <label>Age </label><span id="4" style="color: red;margin-left: 5%;display: none;">* This feild is required</span>
+                    <br>
+                    <input name="age" class="form-control" required type="text" />
+                </section>
+                <section class="form-group">
+                    <label>Password </label><span id="6" style="color: red;margin-left: 5%;display: none;">* password must be 8 character</span>
+                    <br>
+                    <input name="password" required class="form-control" type="password" />
+                </section>
+                <section class="form-group">
+                    <label>Renter password </label><span id="7" style="color: red;margin-left: 5%;display: none;">* password doesn't match</span>
+                    <br>
+                    <input name="repassword" required class="form-control" type="password" />
+                </section>
+                <section class="form-group">
+                    <label>Gender</label><span id="5" style="color: red;margin-left: 5%;display: none;">* This feild is required</span>
+                    <br>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                    
+                </section>
+                <section class="form-group">
+                    <label>Are you </label>
+                    <br>
+                    <select id="role" name="role">
+                        <option value="Buyer">Buyer</option>
+                        <option value="Seller">Seller</option>
+                    </select>
+                </section>
+                <section class="form-group">
+                    <label>Add your photo </label>
+                    <br>
+                    <input  name="ProfilePic" required type='file' />
+                </section>
+                <div class="form-group">
+                <button class="btn btn-md" id="addMember" type="submit">Create account</button>
+                </div>
+            </fieldset>
+            
+        </form>
+    </div>
+    <div id="login">
+        <h3 class="text-center text-white pt-5">Login</h3>
+        <div class="container">
+            <div  class="row justify-content-center align-items-center login-row login-row">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form " action="" method="post">
+                            <h3 class="text-center ">Login</h3>
+                            <div class="form-group">
+                                <label for="username" >Username:</label><br>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" >Password:</label><br>
+                                <input type="text" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="remember-me"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <button type="submit" name="submit" class="btn btn-md" >login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+    <!-- start of scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="js/winHome.js"></script>
 </body>
+
 </html>
