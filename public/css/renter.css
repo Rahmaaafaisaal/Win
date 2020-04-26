@@ -4,7 +4,7 @@
 }
 
 #roomPrice_r {
-    width : 12%;
+    width : 25%;
 }
 
 #roomPriceErrorMsg {
@@ -36,3 +36,31 @@
 .navbar-brand:hover{
     color: beige;
 }
+
+
+#newRoom{
+    color: rgb(28, 16, 109);
+}
+#newRoom .container .newRoom-row #newRoom-column #newRoom-box {
+    margin: auto;
+    margin-top:10%;
+    max-width: 80%;
+    height: 70%;
+    border: 1px solid  rgb(28, 16, 109);
+    border-radius: 3px;
+    background-color:transparent;
+  }
+  #newRoom .container .newRoom-row #newRoom-column #newRoom-box #newRoom-form {
+    padding: 20px;
+  }
+  #newRoom .container .newRoom-row #newRoom-column #newRoom-box #newRoom-form #register-link {
+    margin-top: -85px;
+  }
+
+  #newRoom button{
+      background-color: rgb(28, 16, 109);
+      color: beige;
+     margin-left: 15%;
+      width: 70%;
+      font-size: 1em;
+  }
