@@ -1,0 +1,61 @@
+.fieldset {
+   
+    margin-left: 1vw;
+    margin-right: 1vw;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    border: 0.5px solid  ;
+    border-color: black;
+    height:100%;
+    width: 85%;
+  }
+  .fieldset legend{
+      overflow: hidden;
+      width: auto;
+      margin-top: 0;
+      font-size:1em;
+  }
+
+#addMember{
+
+  font-size: 0.8em;
+  background-color: rgb(28, 16, 109);
+  color: beige;
+  width: auto;
+  position: sticky;
+  left: 70%;
+
+    
+}
+
+
+
+#registrationDiv .container .login-row #login-column #login-box {
+    margin: auto;
+    margin-top:10%;
+    max-width: 80%;
+    height: 320px;
+    border: 1px solid  rgb(28, 16, 109);
+    border-radius: 3px;
+    background-color:transparent;
+  }
+
+  #registrationDiv{
+      display: none;
+      margin-top: 3%;
+      
+  }
+
+  #registrationDiv    .form-control{
+      width: 70%;
+      margin-left: 10%;
+  }
+
+  #registrationDiv    .form-group{
+ float: left;
+ height: 60px;
+ width: 50%;
+ font-size: 80%;
+}
+

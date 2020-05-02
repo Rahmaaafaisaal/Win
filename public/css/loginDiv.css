@@ -1,0 +1,32 @@
+#login{
+    display: none;
+}
+
+#login{
+    color: rgb(28, 16, 109);
+}
+#login .container .login-row #login-column #login-box {
+    margin: auto;
+    margin-top:10%;
+    max-width: 80%;
+    height: 320px;
+    border: 1px solid  rgb(28, 16, 109);
+    border-radius: 3px;
+    background-color:transparent;
+  }
+  #login .container .login-row #login-column #login-box #login-form {
+    padding: 20px;
+  }
+  #login .container .login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+  }
+
+  #login button{
+      background-color: rgb(28, 16, 109);
+      color: beige;
+     margin-left: 15%;
+      width: 70%;
+      font-size: 1em;
+  }
+
+

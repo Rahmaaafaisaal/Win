@@ -1,0 +1,21 @@
+.buttons{
+    border-color: beige;
+    background-color: transparent;
+    color: beige;
+    width: 5.5vw;
+    height: 2.5vw;
+    font-size: 1vw;
+    padding: 0;
+}
+.buttons:active{
+    border-color: beige;
+    color: beige;
+}
+.buttons:hover{
+    color: beige;
+}
+
+.buttons:active {
+    outline: none;
+    border: none;
+}
