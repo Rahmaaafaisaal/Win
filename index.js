@@ -18,7 +18,14 @@ app.use("/renter", renterRoute);
 app.use("/home", homeRoute);
 app.use("/img", imagesRoute);
 
+
+router.get('/',(req,res)=>{
+  res.sendFile('C:/Users/rahma/Desktop/Win/public/win.html')
+})
+
+
 app.use('/', router);
+
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 
 
