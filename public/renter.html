@@ -7,61 +7,140 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/renter.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/simple-sidebar.css">
 
 </head>
 <body>
-    
-    <!-- beginning of room Info Div -->
-    <!-- _r for renter  -->
-    <div id="newRoom">
-        <h3 class="text-center text-white pt-5">New Room</h3>
-        <div class="container">
-            <div  class="row justify-content-center align-items-center newRoom-row newRoom-row">
-                <div id="newRoom-column" class="col-md-6">
-                    <div id="newRoom-box" class="col-md-12">
-                        <form id="newRoom-form" class="form" action=""  method="post">
-                            <h3 class="text-center ">New Room</h3>
-                            <div class="form-group">
-                                <label for="location" >Location:</label><br>
-                                <select id="roomLoc_r" name="location">
-                                    <option value="-1">Choose Room Location</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="price" >Price:</label><br>
-                                <input type="number" name="price" id="roomPrice_r" >
-                                <p style="display:inline" >EGP</p>
-                                <p id="roomPriceErrorMsg" >Please Enter a valid price</p>
-                            </div>
-                            <div class="form-group">
-                                <label for="type" >Type:</label><br>
-                                <select id="roomType_r" name="type">
-                                    <option value="-1">Choose Room Type</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="gender" >Gender:</label><br>
-                                <select id="roomGender_r" name="gender">
-                                    <option value="-1">Choose Gender</option>
-                                </select> 
-                            </div>
-                            <div class="form-group">
-                                    <label>Add room photos (at least one) </label>
-                                    <br>
-                                    <input id="roomPhoto_r" name="roomPic"  accept="image/*" required type='file' multiple/>
-                            </div>
-                            <div class="form-group">
-                                <span id="errorMsg" class="bookFullData">Please fill all the data</span>
-                                <button type="button" id="addingNewBookBtn" class="btn btn-primary">Add Room</button>
-                            </div>
-                        </form>
+      <!-- start of nav bar -->
+    <nav class="navbar homeNav">
+        <a class="navbar-brand titleSty" id="HomePage" href="#"> WIN</a>
+        <div>
+            <button type="button" id="loginbtn" class="btn buttons"> <span>Login</span></button>
+            <button type="button" id="signInbtn" class="btn buttons"><span>Sign up</span> </button>
+        </div>
+    </nav>
+    <!-- end of nav bar -->
+     <!-- start of side bar -->
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="list-group list-group-flush">
+            <a href="#" id="dashboardBtn" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+            <a href="#" id="requestsBtn"  class="list-group-item list-group-item-action bg-light">Requests</a>
+            <a href="#" id="newRoomBtn"   class="list-group-item list-group-item-action bg-light">ِAdd Room</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+    <!-- beginning of view Rooms Div -->
+    <div id="roomCardsDiv" >
+        
+        
+        <!-- <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                        <div id="roomCarousel" class="col-md-4 carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                <div class="carousel-item  cardImgDiv active">
+                                    <img class="d-block  cardImg" src="js/1.png" alt="First slide">
+                                </div>
+                                <div class="carousel-item cardImgDiv">
+                                    <img class="d-block cardImg" src="js/2.jpg" alt="Second slide">
+                                </div>
+                                <div class="carousel-item cardImgDiv">
+                                    <img class="d-block  cardImg" src="js/3.png" alt="Third slide">
+                                </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#roomCarousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#roomCarousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                                </a>
+                        </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     </div>
                 </div>
-            </div>
-        </div>  
+                </div>
+        </div> -->
     </div>
-    <!-- End of room Info Div -->
-  
+    <!-- end of view Rooms Div -->
+    
+    <!-- beginning of add room  Div -->
+    <!-- _r for renter  -->
+    <div id="newRoomDiv">
+            <h3 class="text-center text-white pt-5">New Room</h3>
+            <div class="container">
+                <div  class="row justify-content-center align-items-center newRoom-row newRoom-row">
+                    <div id="newRoom-column" class="col-md-6">
+                        <div id="newRoom-box" class="col-md-12">
+                            <form id="newRoom-form" class="form" action=""  method="post">
+                                <h3 class="text-center ">New Room</h3>
+                                <div class="form-group">
+                                    <label for="location" >Location:</label><br>
+                                    <select id="roomLoc_r" name="location">
+                                        <option value="-1">Choose Room Location</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price" >Price Range:</label><br>
+                                    <p style="display:inline" >Min : </p>
+                                    <input type="number" name="price" id="roomPriceMin_r" >
+                                    <p style="display:inline" >EGP , Max : </p>
+                                    <input type="number" name="price" id="roomPriceMax_r" >
+                                    <p style="display:inline" >EGP</p>
+                                    <p id="roomPriceErrorMsg" >Please Enter a valid price</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="type" >Type:</label><br>
+                                    <select id="roomType_r" name="type">
+                                        <option value="-1">Choose Room Type</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="furniture" >Furniture:</label><br>
+                                    <select id="roomFurn_r" name="furniture">
+                                        <option value="-1">Choose Option</option>
+                                    </select> 
+                                </div>
+                                <div class="form-group">
+                                        <label>Add room photos (at least one) </label>
+                                        <br>
+                                        <input id="roomPhoto_r" name="roomPic"  accept="image/*" required type='file' multiple/>
+                                </div>
+                                <div class="form-group">
+                                    <span id="errorMsg" class="bookFullData">Please fill all the data</span>
+                                    <button type="button" id="addingNewRoomBtn" class="btn btn-primary">Add Room</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <!-- End of room Info Div -->
+
+    </div>
+          <!-- /#wrapper -->
+          <!-- end of side bar -->
+
+    
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+ integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+ crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+ integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+ crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+ integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+ crossorigin="anonymous"></script>
     <script src='js/renter.js'></script>
 </body>
 </html>

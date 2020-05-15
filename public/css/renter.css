@@ -3,8 +3,21 @@
     color: red;
 }
 
-#roomPrice_r {
-    width : 25%;
+.cardImgDiv{
+    width:  60%;
+    height: 50%;
+}
+
+.cardImg{
+    width: 200px;
+    height: 200px;
+  }
+#roomPriceMin_r {
+    width : 20%;
+}
+
+#roomPriceMax_r {
+    width : 20%;
 }
 
 #roomPriceErrorMsg {
@@ -15,52 +28,37 @@
     margin-top: 0%;
 }
 
-
-.homeNav{
-    background-image: url("../img/bk.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-bottom-left-radius: 0.5vw;
-    border-bottom-right-radius: 0.5vw;
-}
-
-.titleSty{
-    color: beige;
-    font-size: 1.5vw;
-    font-weight: bold;
-    font-style: italic;
-    margin-left: 5vw;
-
-}
-
-.navbar-brand:hover{
-    color: beige;
-}
-
-
-#newRoom{
+#newRoomDiv
+{
+    display: none;
     color: rgb(28, 16, 109);
 }
-#newRoom .container .newRoom-row #newRoom-column #newRoom-box {
+
+#newRoomDiv .container .newRoom-row #newRoom-column  {
     margin: auto;
-    margin-top:10%;
-    max-width: 80%;
+    margin-top:2%;
+    max-width: 100%;
     height: 70%;
     border: 1px solid  rgb(28, 16, 109);
     border-radius: 3px;
     background-color:transparent;
   }
-  #newRoom .container .newRoom-row #newRoom-column #newRoom-box #newRoom-form {
+  #newRoomDiv .container .newRoom-row #newRoom-column  #newRoom-form {
     padding: 20px;
   }
-  #newRoom .container .newRoom-row #newRoom-column #newRoom-box #newRoom-form #register-link {
+  #newRoomDiv .container .newRoom-row #newRoom-column  #newRoom-form #register-link {
     margin-top: -85px;
   }
 
-  #newRoom button{
+  #newRoomDiv button{
       background-color: rgb(28, 16, 109);
       color: beige;
      margin-left: 15%;
       width: 70%;
       font-size: 1em;
   }
+
+#roomCardsDiv{
+    margin-left: 7%;
+    margin-top: 5%;
+}

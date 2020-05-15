@@ -1,62 +1,85 @@
-/* Dom Elements */
-const roomLocInput     = document.getElementById('roomLoc_r');
-const roomPriceInput   = document.getElementById('roomPrice_r');
-const roomTypeInput    = document.getElementById('roomType_r');
-const roomGenderInput  = document.getElementById('roomGender_r');
-const roomPhotoInput   = document.getElementById('roomPhoto_r');
-const errorMsgDiv      = document.getElementById('errorMsg');
-const priceErrorMsg    = document.getElementById('roomPriceErrorMsg');
-const addingNewBookBtn = document.getElementById('addingNewBookBtn');
+/*******************Dom Elements*******************/
+const roomLocInput      = document.getElementById('roomLoc_r');
+const roomPriceMinInput = document.getElementById('roomPriceMin_r');
+const roomPriceMaxInput = document.getElementById('roomPriceMax_r');
+const roomTypeInput     = document.getElementById('roomType_r');
+const roomFurnInput     = document.getElementById('roomFurn_r');
+const roomPhotoInput    = document.getElementById('roomPhoto_r');
+const errorMsgDiv       = document.getElementById('errorMsg');
+const priceErrorMsg     = document.getElementById('roomPriceErrorMsg');
+const addingNewRoomBtn  = document.getElementById('addingNewRoomBtn');
 
-const newRoomForm      = document.getElementById('newRoom-form');
-function handleSubmit(e)
-{
-    console.log("prinnttt")
-    e.preventDefault()
-    return false
-}
+const dashboardBtn      = document.getElementById('dashboardBtn');
+const requestsBtn       = document.getElementById('requestsBtn');
+const newRoomBtn        = document.getElementById('newRoomBtn');
 
-newRoomForm.addEventListener("submit", handleSubmit)
-
-/* Global Variables */
+const newRoomPage       = document.getElementById('newRoomDiv');
+const roomCardsDiv      = document.getElementById("roomCardsDiv")
+/*******************Global Variables*******************/
 const locationOptions = ["October","Fifth settlement","First settlement","El-Sheikh Zayed"]
-const genderOption    = ["Male","Female"]
+const furnOption      = ["Furnished","Unfurnished"]
 const typesOptions    = ["Single","Double","Triple"]
 
-/* Drop Down Menus Init */
+/*******************Drop Down Menus Init*******************/
 locationOptions.forEach( (elem,index) => {
-    let optn = document.createElement("OPTION");
-    optn.text = elem;
+    let optn   = document.createElement("OPTION");
+    optn.text  = elem;
     optn.value = index;
     roomLocInput.options.add(optn); 
 })
 
-genderOption.forEach( (elem,index) => {
-    let optn = document.createElement("OPTION");
-    optn.text = elem;
+furnOption.forEach( (elem,index) => {
+    let optn   = document.createElement("OPTION");
+    optn.text  = elem;
     optn.value = index;
-    roomGenderInput.options.add(optn); 
+    roomFurnInput.options.add(optn); 
 })
 
 typesOptions.forEach( (elem,index) => {
-    let optn = document.createElement("OPTION");
-    optn.text = elem;
+    let optn   = document.createElement("OPTION");
+    optn.text  = elem;
     optn.value = index;
     roomTypeInput.options.add(optn); 
 })
 
-/* Event listeners  */
-addingNewBookBtn.addEventListener("click",getTheRoomData)
+/*******************Event listeners*******************/
+addingNewRoomBtn.addEventListener("click",getTheRoomData)
+dashboardBtn.addEventListener("click",openDashboardPage)
+requestsBtn.addEventListener("click",openRequestsPage)
+newRoomBtn.addEventListener("click",openNewRoomPage)
 
-/* Submit the Forum */
+
+/********************Function*******************/
+
+/* navigation Functions */
+function openDashboardPage(){
+    roomCardsDiv.style.display  = "block"
+    newRoomPage.style.display   = "none"
+
+}
+
+function openRequestsPage(){
+    roomCardsDiv.style.display = "none"
+    newRoomPage.style.display  = "none"
+
+}
+
+function openNewRoomPage(){
+   
+    roomCardsDiv.style.display = "none";
+    newRoomPage.style.display  = "block";
+}
+
+/* New Room Page Functions*/
 function getTheRoomData(e){
     e.preventDefault()
-    let roomLocIndex    = roomLocInput.value ;
-    let roomTypeIndex   = roomTypeInput.value ;
-    let roomGenderIndex = roomGenderInput.value ; 
-    let roomPrice       = roomPriceInput.value ; 
-    let errorFlag       = false;
-    let roomPhotosNames = []
+    let roomLocIndex     = roomLocInput.value ;
+    let roomTypeIndex    = roomTypeInput.value ;
+    let roomFurnIndex    = roomFurnInput.value ; 
+    let roomPriceMin     = roomPriceMinInput.value ; 
+    let roomPriceMax     = roomPriceMaxInput.value ; 
+    let errorFlag        = false;
+    let roomPhotosNames  = []
 
 
     /* Check the Input elements and handle erros */
@@ -76,15 +99,15 @@ function getTheRoomData(e){
         roomTypeInput.style.borderColor = "grey"
     }
 
-    if (roomGenderIndex == -1 )
+    if (roomFurnIndex == -1 )
     {
         errorFlag = true ;
-        roomGenderInput.style.borderColor = "red"
+        roomFurnInput.style.borderColor = "red"
     } else{
-        roomGenderInput.style.borderColor = "grey"
+        roomFurnInput.style.borderColor = "grey"
     }
 
-    if ( roomPrice < 1)
+    if ( roomPriceMin < 0 || roomPriceMax < 1  || roomPriceMin > roomPriceMax)
     {
         priceErrorMsg.style.display = "inline-block";
         errorFlag = true ;
@@ -92,12 +115,20 @@ function getTheRoomData(e){
         priceErrorMsg.style.display = "none";
     }
 
-    if ( !roomPrice )
+    if ( !roomPriceMin )
     {
-        roomPriceInput.style.borderColor = "red";
+        roomPriceMinInput.style.borderColor = "red";
         errorFlag = true ;
     }else{
-        roomPriceInput.style.borderColor = "grey";
+        roomPriceMinInput.style.borderColor = "grey";
+    }
+
+    if ( !roomPriceMax )
+    {
+        roomPriceMaxInput.style.borderColor = "red";
+        errorFlag = true ;
+    }else{
+        roomPriceMaxInput.style.borderColor = "grey";
     }
 
     if ( !roomPhotoInput.files[0] )
@@ -117,7 +148,7 @@ function getTheRoomData(e){
         errorMsgDiv.style.display = "block";
     }else {
         errorMsgDiv.style.display = "none";
-        sendDataToServer(locationOptions[roomLocIndex],roomPrice,typesOptions[roomTypeIndex],genderOption[roomGenderIndex],roomPhotosNames,roomPhotoInput.files)
+        sendDataToServer(locationOptions[roomLocIndex],roomPriceMin , roomPriceMax ,typesOptions[roomTypeIndex],furnOption[roomFurnIndex],roomPhotosNames,roomPhotoInput.files)
     }
     return false
 }
@@ -130,11 +161,9 @@ async function uploadImage(images){
     // image = roomPhotoInput.files[0] 
     if(images ){
         let formData = new FormData()
-        Array.from(images).forEach( (elem,i )=>{
+        Array.from(images).forEach( (elem )=>{
         formData.append('img', elem)    
         })
-        // sendDataToBackend(formData,'img/')
-        
         let req = await fetch('http://localhost:3000/renter/img', {method: 'POST',body:formData })
         return req.text()
     }  
@@ -142,19 +171,18 @@ async function uploadImage(images){
 
 
 /* send the Data to the Server */
-async function sendDataToServer(location,price,type,gender,roomPhotosNames,roomPhotos)
+async function sendDataToServer(location,priceMin,priceMax,type,furniture,roomPhotosNames,roomPhotos)
 {
-    
-    console.log(location +"," +price +","+ type+"," + gender)
-    
+
     let imageRes = await uploadImage(roomPhotos) 
     console.log(imageRes)
 
     roomData={
         "location"   : location,
-        "price"      : price,
+        "priceMin"   : priceMin,
+        "priceMax"   : priceMax,
         "type"       : type,
-        "gender"     : gender,
+        "furniture"  : furniture,
         "roomImages" : roomPhotosNames
     }
 
@@ -173,3 +201,34 @@ async function sendDataToServer(location,price,type,gender,roomPhotosNames,roomP
 
 }
 
+rooms= [ {"text":"room1", "images":['js/1.png',"js/2.jpg"] },{"text":"room2", "images":['js/1.png',"js/2.jpg"] }  ]
+
+function displayRoom(rooms){
+    let order = ['First','Second', 'Third','Forth','Fifth','Sixth','Seventh','Eighth','Ninth']
+    let cards= ''
+    rooms.forEach( (room,index)=>{
+        cards = '<div class="cardDiv card mb-3" style="width: 540px;"><div class="row no-gutters">'
+        cards += `<div id="roomCarousel${index}" class="col-md-4 carousel slide" data-ride="carousel">`
+        cards += '<div class="carousel-inner">'
+        room.images.forEach( (image, i)=>{
+            
+            cards += '<div class="carousel-item cardImgDiv'
+            if (i == 0 )
+            {
+                cards += ' active'  
+            }
+            cards +=`"><img class="d-block cardImg" src=${image} alt="${order[i]} slide"></div>`
+        })
+        
+        cards += `</div><a class="carousel-control-prev" href="#roomCarousel${index}" role="button" data-slide="prev">`
+        cards += '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a>'
+        cards += `<a class="carousel-control-next" href="#roomCarousel${index}" role="button" data-slide="next">`
+        cards += '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>'
+        cards += '<div class="col-md-8"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">'
+        cards += room.text
+        cards += '</p></div></div></div></div></div>'
+        roomCardsDiv.innerHTML += cards
+    })
+}
+
+displayRoom(rooms)
