@@ -1,19 +1,15 @@
-::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background:white;
 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background-image: url("../img/bk.png");
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background-image: url("../img/bk.png");
-  }
+body{
+  overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+    width: 0.3em;
+} 
+body::-webkit-scrollbar-track {
+box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+body::-webkit-scrollbar-thumb {
+background-color: rgb(21, 9, 56);
+background-image: url("../img/bk.png");;
+outline: 1px solid rgb(16, 3, 54);
+}
