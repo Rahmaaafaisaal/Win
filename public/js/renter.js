@@ -55,7 +55,7 @@ newRoomBtn.addEventListener("click",openNewRoomPage)
 function openDashboardPage(){
     roomCardsDiv.style.display  = "block"
     newRoomPage.style.display   = "none"
-
+    getRenterRooms(1)
 }
 
 function openRequestsPage(){
@@ -189,28 +189,55 @@ async function sendDataToServer(location,priceMin,priceMax,type,furniture,roomPh
     fetch('http://localhost:3000/renter/room',
     {
        method:"POST",
-       headers: {Accept: 'text/plain'},
+       headers: {Accept: 'application/json'},
        body:JSON.stringify(roomData),
     })
     .then(function(res){ 
-      return res.text();
-    }).then ( data => {
-    console.log(data);
+      return res.json();
+    }).then ( res => {
+    if (res.status == "error" )
+    {
+        console.log("there is an Error happened")
+    }else{
+        console.log("Room added Successfuly")
+    }
     })
    
 
 }
 
-rooms= [ {"text":"room1", "images":['js/1.png',"js/2.jpg"] },{"text":"room2", "images":['js/1.png',"js/2.jpg"] }  ]
+/********************Getting Renter Rooms*******************************/
+
+
+function getRenterRooms(renterId)
+{
+    fetch(`http://localhost:3000/renter/rooms/${renterId}`,
+    {
+       method:"GET",
+       headers: {Accept: 'application/json'}
+    })
+    .then(function(res){ 
+      return res.json();
+    }).then ( res => {
+    if (res.status == "error" )
+    {
+        console.log("there is an Error happened")
+    }else{
+        displayRoom(res.data)
+    }
+    })
+}
+
 
 function displayRoom(rooms){
     let order = ['First','Second', 'Third','Forth','Fifth','Sixth','Seventh','Eighth','Ninth']
     let cards= ''
+    roomCardsDiv.innerHTML = ''
     rooms.forEach( (room,index)=>{
         cards = '<div class="cardDiv card mb-3" style="width: 540px;"><div class="row no-gutters">'
-        cards += `<div id="roomCarousel${index}" class="col-md-4 carousel slide" data-ride="carousel">`
+        cards += `<div id="roomCarousel${index}" class="col-md-4 carousel slide" data-ride="carousel" data-interval="3000">`
         cards += '<div class="carousel-inner">'
-        room.images.forEach( (image, i)=>{
+        room.roomImages.forEach( (image, i)=>{
             
             cards += '<div class="carousel-item cardImgDiv'
             if (i == 0 )
@@ -224,11 +251,16 @@ function displayRoom(rooms){
         cards += '<span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a>'
         cards += `<a class="carousel-control-next" href="#roomCarousel${index}" role="button" data-slide="next">`
         cards += '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>'
-        cards += '<div class="col-md-8"><div class="card-body"><h5 class="card-title">Card title</h5><p class="card-text">'
-        cards += room.text
+        cards += `<div class="col-md-8"><div class="card-body"><h5 class="card-title">Room #${room.roomId}</h5><p class="card-text">`
+        cards += `<p>Location : ${room.location} </p><p>Price : from ${room.priceMin} to ${room.priceMax}</p><p> Furniture status : ${room.furniture}</p>`
         cards += '</p></div></div></div></div></div>'
         roomCardsDiv.innerHTML += cards
     })
+    //make the images slider starts autoplay
+    $(".carousel").carousel();
 }
 
-displayRoom(rooms)
+
+/*******************Entry Point************************* */
+openDashboardPage()
+
