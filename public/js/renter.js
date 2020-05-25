@@ -201,8 +201,8 @@ async function sendDataToServer(location,priceMin,priceMax,type,furniture,roomPh
 
 }
 
-rooms= [ {"text":"room1", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room2", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room2", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room2", "images":['img/1.jpg',"img/2.jpg"] }  ]
+rooms= [ {"text":"room1", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room1", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room1", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room1", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room2", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room2", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room2", "images":['img/1.jpg',"img/2.jpg"] }  ]
 
 
 
-displayRoom(rooms,roomCardsDiv)
+displayRoom(rooms,roomCardsDiv,true)

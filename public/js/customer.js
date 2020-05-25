@@ -10,7 +10,7 @@ return data
 
 
 getRoomsFromBackend('customer/rooms').then((data)=>{
-    displayRoom(data,roomsDiv)
+    displayRoom(data,roomsDiv,false)
 })
 
 
