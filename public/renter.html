@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="css/renter.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/simple-sidebar.css">
-
+    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/sideNav.css">
 </head>
 <body>
       <!-- start of nav bar -->
@@ -22,8 +23,8 @@
     </nav>
     <!-- end of nav bar -->
      <!-- start of side bar -->
-    <div class="d-flex" id="wrapper">
-
+    <div class="d-flex " id="wrapper">
+      
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
@@ -31,11 +32,12 @@
             <a href="#" id="requestsBtn"  class="list-group-item list-group-item-action bg-light">Requests</a>
             <a href="#" id="newRoomBtn"   class="list-group-item list-group-item-action bg-light">ِAdd Room</a>
             </div>
-        </div>
+        
+    </div>
         <!-- /#sidebar-wrapper -->
 
     <!-- beginning of view Rooms Div -->
-    <div id="roomCardsDiv" >
+    <div id="roomCardsDiv" class="cardsInOrder">
         
         
         <!-- <div class="card mb-3" style="max-width: 540px;">
@@ -141,6 +143,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
  crossorigin="anonymous"></script>
-    <script src='js/renter.js'></script>
+ <script src='js/drawCrads.js'></script>
+ <script src='js/renter.js'></script>
 </body>
 </html>

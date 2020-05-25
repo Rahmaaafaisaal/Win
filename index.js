@@ -6,6 +6,7 @@ const cors = require('cors');
 const path= require("path");
 const renterRoute = require("./routes/renterRoute");
 const homeRoute = require("./routes/homeRoute");
+const customerRoute = require("./routes/customerRoute");
 const imagesRoute=require("./routes/images")
 
 app.use(express.static(path.join(__dirname,'public')));
@@ -17,10 +18,10 @@ app.use(express.json({
 app.use("/renter", renterRoute);
 app.use("/home", homeRoute);
 app.use("/img", imagesRoute);
-
+app.use("/customer", customerRoute);
 
 router.get('/',(req,res)=>{
-  res.sendFile('C:/Users/rahma/Desktop/Win/public/win.html')
+  res.sendFile('C:/Users/rahma/Desktop/Win/public/customer.html')
 })
 
 
