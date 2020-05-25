@@ -3,15 +3,7 @@
     color: red;
 }
 
-.cardImgDiv{
-    width:  60%;
-    height: 50%;
-}
 
-.cardImg{
-    width: 200px;
-    height: 200px;
-  }
 #roomPriceMin_r {
     width : 20%;
 }
@@ -58,7 +50,3 @@
       font-size: 1em;
   }
 
-#roomCardsDiv{
-    margin-left: 7%;
-    margin-top: 5%;
-}

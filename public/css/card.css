@@ -1,0 +1,19 @@
+.cardsInOrder{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 7%;
+    margin-top: 5%;
+}
+.cardDiv{
+margin: 1%;
+}
+
+.cardImg{
+    width: 200px;
+    height: 300px;
+}
+
+
+
+
