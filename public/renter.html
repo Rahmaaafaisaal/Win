@@ -6,11 +6,14 @@
     <title>renter</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css">
     <link rel="stylesheet" href="css/renter.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/simple-sidebar.css">
     <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/sideNav.css">
+    <link rel="stylesheet" href="css/requests.css">
 </head>
 <body>
       <!-- start of nav bar -->
@@ -22,7 +25,7 @@
         </div>
     </nav>
     <!-- end of nav bar -->
-     <!-- start of side bar -->
+    <!-- start of side bar -->
     <div class="d-flex " id="wrapper">
       
         <!-- Sidebar -->
@@ -38,43 +41,28 @@
 
     <!-- beginning of view Rooms Div -->
     <div id="roomCardsDiv" class="cardsInOrder">
-        
-        
-        <!-- <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                        <div id="roomCarousel" class="col-md-4 carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                <div class="carousel-item  cardImgDiv active">
-                                    <img class="d-block  cardImg" src="js/1.png" alt="First slide">
-                                </div>
-                                <div class="carousel-item cardImgDiv">
-                                    <img class="d-block cardImg" src="js/2.jpg" alt="Second slide">
-                                </div>
-                                <div class="carousel-item cardImgDiv">
-                                    <img class="d-block  cardImg" src="js/3.png" alt="Third slide">
-                                </div>
-                                </div>
-                                <a class="carousel-control-prev" href="#roomCarousel" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#roomCarousel" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                                </a>
-                        </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-                </div>
-        </div> -->
+ 
     </div>
     <!-- end of view Rooms Div -->
-    
+
+    <!-- beginning of Requestes page -->
+    <div id="requestsDiv">
+        <section>
+            <div class="container mt-5">
+                <div class="row">
+                        <div class="col-sm-12">
+                            <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                            
+                                <i class="start-icon far fa-times-circle faa-pulse animated"></i>
+                                <strong class="font__weight-semibold">Oh snap!</strong> your request for <a href="">Room</a> have been refused.
+                            </div>
+                        </div>
+                </div>
+            </div> 
+        </section>           
+    </div>
+   <!-- end of view Requestes Div -->
+  
     <!-- beginning of add room  Div -->
     <!-- _r for renter  -->
     <div id="newRoomDiv">

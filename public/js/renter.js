@@ -14,7 +14,9 @@ const requestsBtn       = document.getElementById('requestsBtn');
 const newRoomBtn        = document.getElementById('newRoomBtn');
 
 const newRoomPage       = document.getElementById('newRoomDiv');
-const roomCardsDiv      = document.getElementById("roomCardsDiv")
+const roomCardsPage     = document.getElementById("roomCardsDiv")
+const requestsPage      = document.getElementById("requestsDiv")
+
 /*******************Global Variables*******************/
 const locationOptions = ["October","Fifth settlement","First settlement","El-Sheikh Zayed"]
 const furnOption      = ["Furnished","Unfurnished"]
@@ -53,21 +55,24 @@ newRoomBtn.addEventListener("click",openNewRoomPage)
 
 /* navigation Functions */
 function openDashboardPage(){
-    roomCardsDiv.style.display  = "block"
-    newRoomPage.style.display   = "none"
+    roomCardsPage.style.visibility = "visible"; 
+    newRoomPage.style.visibility   = "hidden"
+    requestsPage.style.visibility  = "hidden"
     getRenterRooms(1)
 }
 
 function openRequestsPage(){
-    roomCardsDiv.style.display = "none"
-    newRoomPage.style.display  = "none"
+    roomCardsPage.style.visibility = "hidden"
+    newRoomPage.style.visibility   = "hidden"
+    requestsPage.style.visibility  = "visible"
 
 }
 
 function openNewRoomPage(){
    
-    roomCardsDiv.style.display = "none";
-    newRoomPage.style.display  = "block";
+    roomCardsPage.style.visibility = "hidden";
+    newRoomPage.style.visibility   = "visible"
+    requestsPage.style.visibility  = "hidden";
 }
 
 /* New Room Page Functions*/
@@ -109,10 +114,10 @@ function getTheRoomData(e){
 
     if ( roomPriceMin < 0 || roomPriceMax < 1  || roomPriceMin > roomPriceMax)
     {
-        priceErrorMsg.style.display = "inline-block";
+        priceErrorMsg.style.visibility = "visible";
         errorFlag = true ;
     }else{
-        priceErrorMsg.style.display = "none";
+        priceErrorMsg.style.visibility = "hidden";
     }
 
     if ( !roomPriceMin )
@@ -145,9 +150,9 @@ function getTheRoomData(e){
 
     if (errorFlag == true )
     {
-        errorMsgDiv.style.display = "block";
+        errorMsgDiv.style.visibility = "visible";
     }else {
-        errorMsgDiv.style.display = "none";
+        errorMsgDiv.style.visibility = "hidden";
         sendDataToServer(locationOptions[roomLocIndex],roomPriceMin , roomPriceMax ,typesOptions[roomTypeIndex],furnOption[roomFurnIndex],roomPhotosNames,roomPhotoInput.files)
     }
     return false
@@ -232,7 +237,7 @@ function getRenterRooms(renterId)
 function displayRoom(rooms){
     let order = ['First','Second', 'Third','Forth','Fifth','Sixth','Seventh','Eighth','Ninth']
     let cards= ''
-    roomCardsDiv.innerHTML = ''
+    roomCardsPage.innerHTML = ''
     rooms.forEach( (room,index)=>{
         cards = '<div class="cardDiv card mb-3" style="width: 540px;"><div class="row no-gutters">'
         cards += `<div id="roomCarousel${index}" class="col-md-4 carousel slide" data-ride="carousel" data-interval="3000">`
@@ -254,7 +259,7 @@ function displayRoom(rooms){
         cards += `<div class="col-md-8"><div class="card-body"><h5 class="card-title">Room #${room.roomId}</h5><p class="card-text">`
         cards += `<p>Location : ${room.location} </p><p>Price : from ${room.priceMin} to ${room.priceMax}</p><p> Furniture status : ${room.furniture}</p>`
         cards += '</p></div></div></div></div></div>'
-        roomCardsDiv.innerHTML += cards
+        roomCardsPage.innerHTML += cards
     })
     //make the images slider starts autoplay
     $(".carousel").carousel();

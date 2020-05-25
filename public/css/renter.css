@@ -1,5 +1,6 @@
 #errorMsg {
-    display: none;
+    /* display: none; */
+    visibility: hidden; 
     color: red;
 }
 
@@ -13,7 +14,7 @@
 }
 
 #roomPriceErrorMsg {
-    display: none;
+    visibility : hidden;
     color: red;
 }
 #roomForumDiv_r{
@@ -22,13 +23,14 @@
 
 #newRoomDiv
 {
-    display: none;
+    visibility: hidden; 
     color: rgb(28, 16, 109);
 }
 
 #newRoomDiv .container .newRoom-row #newRoom-column  {
     margin: auto;
-    margin-top:2%;
+    margin-top:-5%;
+    margin-left:-80%;
     max-width: 100%;
     height: 70%;
     border: 1px solid  rgb(28, 16, 109);
@@ -36,7 +38,7 @@
     background-color:transparent;
   }
   #newRoomDiv .container .newRoom-row #newRoom-column  #newRoom-form {
-    padding: 20px;
+    padding: 15px;
   }
   #newRoomDiv .container .newRoom-row #newRoom-column  #newRoom-form #register-link {
     margin-top: -85px;
@@ -45,8 +47,13 @@
   #newRoomDiv button{
       background-color: rgb(28, 16, 109);
       color: beige;
-     margin-left: 15%;
+      margin-left: 15%;
       width: 70%;
       font-size: 1em;
   }
 
+  #requestsDiv{
+    visibility : hidden;
+    margin-top: 2%;
+    width: 100%;
+} 
