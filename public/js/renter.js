@@ -8,6 +8,7 @@ const roomPhotoInput    = document.getElementById('roomPhoto_r');
 const errorMsgDiv       = document.getElementById('errorMsg');
 const priceErrorMsg     = document.getElementById('roomPriceErrorMsg');
 const addingNewRoomBtn  = document.getElementById('addingNewRoomBtn');
+const noReqMsg          = document.getElementById("noReqMsg");
 
 const dashboardBtn      = document.getElementById('dashboardBtn');
 const requestsBtn       = document.getElementById('requestsBtn');
@@ -65,7 +66,7 @@ function openRequestsPage(){
     roomCardsPage.style.visibility = "hidden"
     newRoomPage.style.visibility   = "hidden"
     requestsPage.style.visibility  = "visible"
-
+    displayRequests(requestsList)
 }
 
 function openNewRoomPage(){
@@ -265,9 +266,26 @@ function displayRoom(rooms){
     $(".carousel").carousel();
 }
 
+/********************Getting Renter Requests*******************************/
+function displayRequests(requests){
 
+    let notifications = ''
+    if(requests.length  > 0 ){
+        requestsPage.innerHTML = ''
+        for(req of requests){
+            notifications += `<div class="col-sm-12">
+                    <div class="alert fade alert-simple alert-info alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                        <i class="start-icon  fa fa-info-circle faa-shake animated"></i>
+                        <strong class="font__weight-semibold"></strong> ${req.customerName} made a proposal for This <a href="">Room #${req.roomId}</a> with ${req.price}.
+                    </div>
+                </div>`
+        }
+        requestsPage.innerHTML = notifications
+    }
+}
 /*******************Entry Point************************* */
 openDashboardPage()
 
-
+let requestsList = [ {customerName:"rahma", customerId :2, roomId:1,price:2000},
+                    {customerName:"karim", customerId :1, roomId:2,price:1000} ]
 
