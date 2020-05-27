@@ -84,4 +84,45 @@ router.get("/rooms/:id",(req,res)=>{
 })
 
 
+router.get("/req/:id",(req,res)=>{
+  renterList = [{"id":1 , "requests": [ {customerName:"rahma", customerId :2, roomId:1, price:2000, reqId:1},
+                                        {customerName:"karim", customerId :1, roomId:2, price:1000, reqId:2},
+                                        {customerName:"ahmed", customerId :4, roomId:2, price:3000, reqId:3}  ]}]
+
+  const renterId = req.params.id;
+  for(renter of renterList){
+      if( renter.id ==  renterId){
+     
+      res.send({ "status":"success", "data":renter.requests })
+      return 
+    }
+  }
+  // if the loop ended without responsing to the frontend, which means the renter is not existed, send error
+  res.json({"status":"error"})
+  
+})
+
+
+router.get("/req/accept/:id",(req,res)=>{
+  const reqId = req.params.id;
+    //query the request and accept it 
+    // delete other requests for this room
+    //direct to  "/req/:id" => id is the renter id 
+    console.log(reqId)
+    res.send({ "status":"success" ,body :{customerName:"ahmed", customerId :4, roomId:2, price:3000, reqId:3} })
+  // res.json({"status":"error"})
+  
+})
+
+
+router.get("/req/decline/:id",(req,res)=>{
+  const reqId = req.params.id;
+  //query the request and delete it 
+  console.log(reqId)
+  res.send({ "status":"success" })
+  
+  // res.json({"status":"error"})
+  
+})
+
 module.exports = router;

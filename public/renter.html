@@ -3,6 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <link rel="icon" type="image/ico" href="img/icon.png" />
     <title>renter</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -46,7 +47,7 @@
     <!-- end of view Rooms Div -->
 
     <!-- beginning of Requestes page -->
-    <div id="requestsDiv">
+    <div id="requestsDiv" hidden="true">
         <section>
             <div class="container mt-5">
                 <div class="row">
@@ -61,10 +62,31 @@
         </section>           
     </div>
    <!-- end of view Requestes Div -->
-  
+  <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <i class="start-icon far fa-check-circle faa-tada animated"></i>
+            <h5 class="modal-title" id="exampleModalLabel">&nbsp;Request Accepted</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body" id="reqAcceptedTxt">
+            ....
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- End of Requestes page -->
+
     <!-- beginning of add room  Div -->
     <!-- _r for renter  -->
-    <div id="newRoomDiv">
+    <div id="newRoomDiv" hidden="true">
             <h3 class="text-center text-white pt-5">New Room</h3>
             <div class="container">
                 <div  class="row justify-content-center align-items-center newRoom-row newRoom-row">
@@ -85,7 +107,7 @@
                                     <p style="display:inline" >EGP , Max : </p>
                                     <input type="number" name="price" id="roomPriceMax_r" >
                                     <p style="display:inline" >EGP</p>
-                                    <p id="roomPriceErrorMsg" >Please Enter a valid price</p>
+                                    <p id="roomPriceErrorMsg" hidden="true">Please Enter a valid price</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="type" >Type:</label><br>
@@ -105,7 +127,7 @@
                                         <input id="roomPhoto_r" name="roomPic"  accept="image/*" required type='file' multiple/>
                                 </div>
                                 <div class="form-group">
-                                    <span id="errorMsg" class="bookFullData">Please fill all the data</span>
+                                    <span id="errorMsg" class="bookFullData" hidden="true">Please fill all the data</span>
                                     <button type="button" id="addingNewRoomBtn" class="btn btn-primary">Add Room</button>
                                 </div>
                             </form>
