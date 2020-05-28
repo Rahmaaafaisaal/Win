@@ -1,4 +1,15 @@
-/* #sidebar-wrapper{
-    position: relative;
+.sidenav {
+    width: 130px;
+    position: fixed;
+    z-index: 1;
     top: 20%;
-} */
+    left: 10px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+  }
+  .main {
+    margin-left: 140px; /* Same width as the sidebar + left position in px */
+    padding: 0px 10px;
+  }
+  

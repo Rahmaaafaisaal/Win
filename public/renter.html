@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>renter</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css">
     <link rel="stylesheet" href="css/renter.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/simple-sidebar.css">
@@ -15,8 +17,9 @@
     <link rel="stylesheet" href="css/sideNav.css">
     <link rel="stylesheet" href="css/requests.css">
 </head>
+
 <body>
-      <!-- start of nav bar -->
+    <!-- start of nav bar -->
     <nav class="navbar homeNav">
         <a class="navbar-brand titleSty" id="HomePage" href="#"> WIN</a>
         <div>
@@ -27,110 +30,114 @@
     <!-- end of nav bar -->
     <!-- start of side bar -->
     <div class="d-flex " id="wrapper">
-      
+
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
-            <a href="#" id="dashboardBtn" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-            <a href="#" id="requestsBtn"  class="list-group-item list-group-item-action bg-light">Requests</a>
-            <a href="#" id="newRoomBtn"   class="list-group-item list-group-item-action bg-light">ِAdd Room</a>
+                <a href="#" id="dashboardBtn" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+                <a href="#" id="requestsBtn" class="list-group-item list-group-item-action bg-light">Requests</a>
+                <a href="#" id="newRoomBtn" class="list-group-item list-group-item-action bg-light">ِAdd Room</a>
             </div>
-        
-    </div>
+
+        </div>
         <!-- /#sidebar-wrapper -->
+       
+            <!-- beginning of view Rooms Div -->
+            <div id="roomCardsDiv" class="cardsInOrder">
 
-    <!-- beginning of view Rooms Div -->
-    <div id="roomCardsDiv" class="cardsInOrder">
- 
-    </div>
-    <!-- end of view Rooms Div -->
+            </div>
+            <!-- end of view Rooms Div -->
 
-    <!-- beginning of Requestes page -->
-    <div id="requestsDiv">
-        <section>
-            <div class="container mt-5">
-                <div class="row">
-                        <div class="col-sm-12" id="noReqMsg">
-                            <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
-                                <i class="start-icon far fa-times-circle faa-pulse animated"></i>
-                                <strong class="font__weight-semibold"></strong> No requests found.
+            <!-- beginning of Requestes page -->
+            <div id="requestsDiv">
+                <section>
+                    <div class="container mt-5">
+                        <div class="row">
+                            <div class="col-sm-12" id="noReqMsg">
+                                <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show"
+                                    role="alert" data-brk-library="component__alert">
+                                    <i class="start-icon far fa-times-circle faa-pulse animated"></i>
+                                    <strong class="font__weight-semibold"></strong> No requests found.
+                                </div>
                             </div>
                         </div>
-                </div>
-            </div> 
-        </section>           
-    </div>
-   <!-- end of view Requestes Div -->
-  
-    <!-- beginning of add room  Div -->
-    <!-- _r for renter  -->
-    <div id="newRoomDiv">
-            <h3 class="text-center text-white pt-5">New Room</h3>
-            <div class="container">
-                <div  class="row justify-content-center align-items-center newRoom-row newRoom-row">
-                    <div id="newRoom-column" class="col-md-6">
-                        <div id="newRoom-box" class="col-md-12">
-                            <form id="newRoom-form" class="form" action=""  method="post">
-                                <h3 class="text-center ">New Room</h3>
-                                <div class="form-group">
-                                    <label for="location" >Location:</label><br>
-                                    <select id="roomLoc_r" name="location">
-                                        <option value="-1">Choose Room Location</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="price" >Price Range:</label><br>
-                                    <p style="display:inline" >Min : </p>
-                                    <input type="number" name="price" id="roomPriceMin_r" >
-                                    <p style="display:inline" >EGP , Max : </p>
-                                    <input type="number" name="price" id="roomPriceMax_r" >
-                                    <p style="display:inline" >EGP</p>
-                                    <p id="roomPriceErrorMsg" >Please Enter a valid price</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="type" >Type:</label><br>
-                                    <select id="roomType_r" name="type">
-                                        <option value="-1">Choose Room Type</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="furniture" >Furniture:</label><br>
-                                    <select id="roomFurn_r" name="furniture">
-                                        <option value="-1">Choose Option</option>
-                                    </select> 
-                                </div>
-                                <div class="form-group">
+                    </div>
+                </section>
+            </div>
+            <!-- end of view Requestes Div -->
+
+            <!-- beginning of add room  Div -->
+            <!-- _r for renter  -->
+            <div id="newRoomDiv">
+                <h3 class="text-center text-white pt-5">New Room</h3>
+                <div class="container">
+                    <div class="row justify-content-center align-items-center newRoom-row newRoom-row">
+                        <div id="newRoom-column" class="col-md-6">
+                            <div id="newRoom-box" class="col-md-12">
+                                <form id="newRoom-form" class="form" action="" method="post">
+                                    <h3 class="text-center ">New Room</h3>
+                                    <div class="form-group">
+                                        <label for="location">Location:</label><br>
+                                        <select id="roomLoc_r" name="location">
+                                            <option value="-1">Choose Room Location</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Price Range:</label><br>
+                                        <p style="display:inline">Min : </p>
+                                        <input type="number" name="price" id="roomPriceMin_r">
+                                        <p style="display:inline">EGP , Max : </p>
+                                        <input type="number" name="price" id="roomPriceMax_r">
+                                        <p style="display:inline">EGP</p>
+                                        <p id="roomPriceErrorMsg">Please Enter a valid price</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="type">Type:</label><br>
+                                        <select id="roomType_r" name="type">
+                                            <option value="-1">Choose Room Type</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="furniture">Furniture:</label><br>
+                                        <select id="roomFurn_r" name="furniture">
+                                            <option value="-1">Choose Option</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Add room photos (at least one) </label>
                                         <br>
-                                        <input id="roomPhoto_r" name="roomPic"  accept="image/*" required type='file' multiple/>
-                                </div>
-                                <div class="form-group">
-                                    <span id="errorMsg" class="bookFullData">Please fill all the data</span>
-                                    <button type="button" id="addingNewRoomBtn" class="btn btn-primary">Add Room</button>
-                                </div>
-                            </form>
+                                        <input id="roomPhoto_r" name="roomPic" accept="image/*" required type='file'
+                                            multiple />
+                                    </div>
+                                    <div class="form-group">
+                                        <span id="errorMsg" class="bookFullData">Please fill all the data</span>
+                                        <button type="button" id="addingNewRoomBtn" class="btn btn-primary">Add
+                                            Room</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
+            <!-- End of room Info Div -->
+
         </div>
-        <!-- End of room Info Div -->
+        <!-- /#wrapper -->
+        <!-- end of side bar -->
 
-    </div>
-          <!-- /#wrapper -->
-          <!-- end of side bar -->
 
-    
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
- integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
- crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
- integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
- crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
- integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
- crossorigin="anonymous"></script>
- <script src='js/drawCrads.js'></script>
- <script src='js/renter.js'></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src='js/drawCrads.js'></script>
+    <script src='js/renter.js'></script>
 </body>
+
 </html>

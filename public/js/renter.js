@@ -260,6 +260,7 @@ function displayRoom(rooms){
         cards += `<div class="col-md-8"><div class="card-body"><h5 class="card-title">Room #${room.roomId}</h5><p class="card-text">`
         cards += `<p>Location : ${room.location} </p><p>Price : from ${room.priceMin} to ${room.priceMax}</p><p> Furniture status : ${room.furniture}</p>`
         cards += '</p></div></div></div></div></div>'
+        
         roomCardsPage.innerHTML += cards
     })
     //make the images slider starts autoplay
@@ -280,6 +281,7 @@ function displayRequests(requests){
                     </div>
                 </div>`
         }
+        console.log(notifications)
         requestsPage.innerHTML = notifications
     }
 }
