@@ -10,10 +10,11 @@ age int NOT NULL,
 photoName varchar (50) NOT NULL,
 gender varchar (20) NOT NULL,
 userName varchar (50) NOT NULL UNIQUE,
-phone varchar (20) NOT NULL UNIQUE,
+phone varchar (20) NOT NULL ,
 user_role varchar (20) NOT NULL ,
-email varchar (100) NOT NULL UNIQUE,
+email varchar (100) NOT NULL ,
 job varchar (100) NOT NULL,
+password varchar (100) ,
 );
 
 
@@ -23,10 +24,11 @@ age int NOT NULL,
 photoName varchar (50) NOT NULL,
 gender varchar (20) NOT NULL,
 userName varchar (50) NOT NULL UNIQUE,
-phone varchar (20) NOT NULL UNIQUE,
+phone varchar (20) NOT NULL ,
 user_role varchar (20) NOT NULL ,
-email varchar (100) NOT NULL UNIQUE,
+email varchar (100) NOT NULL ,
 job varchar (100) NOT NULL,
+password varchar (100) ,
 );
 
 

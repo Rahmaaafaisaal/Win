@@ -3,39 +3,114 @@ const router = express.Router();
 const conn = require('../dbConnection');
 const sql=require('mssql');
 router.post("/signUp", (req, res) => {
-
-
-
-
-
-
-    console.log(req.body)
-    res.send("ok")
+    if(req.body.user_role=='Buyer')
+    {
+        addBuyer(req.body,res)
+    }
+    else{
+        addRenter(req.body,res)
+    }
+  
+   
 })
 
 router.post("/login", (req, res) => {
    
-    console.log(req.body)
-    res.send("ok")
+    checkUser(req.body,res)
+  
 })
 
 
 
 
-async function addBuyer(buyerInfo) {
+async function addBuyer(buyerInfo,response) {
+    
     try {
-
+        console.log(buyerInfo)
         let query=new sql.Request(conn)
         query.query(
         `
-        insert into users.buyer (age,photoName,gender,userName,phone,user_role,email,job) values (12,'rahma','rahma','rahma','rahma','rahma','rahma','rahma')
+        insert into users.buyer (age,photoName,gender,userName,phone,user_role,email,job,password) values (${buyerInfo.age},'${buyerInfo.photoName}','${buyerInfo.gender}','${buyerInfo.userName}','${buyerInfo.phone}','${buyerInfo.user_role}','${buyerInfo.email}','${buyerInfo.job}','${buyerInfo.password}')
         `,(err,res)=>{
-            if(err)console.log(err)
-            else console.log(res)
+            if(err)
+            {
+                console.log(err.message)
+                response.send({"status":"error"})
+            }
+            else response.send({"status":"success"})
         });
     } catch (err) {
         console.log(err)
     }
 }
+
+
+async function addRenter(renterInfo,response) {
+    
+    try {
+        
+        let query=new sql.Request(conn)
+        query.query(
+        `
+        insert into users.renter (age,photoName,gender,userName,phone,user_role,email,job,password) values (${renterInfo.age},'${renterInfo.photoName}','${renterInfo.gender}','${renterInfo.userName}','${renterInfo.phone}','${renterInfo.user_role}','${renterInfo.email}','${renterInfo.job}','${renterInfo.password}')
+        `,(err,res)=>{
+            if(err)
+            {
+                console.log(err.message)
+                response.send({"status":"error"})
+            }
+            else response.send({"status":"success"})
+        });
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+async function checkUser(user,response)
+{
+        let queryBuyer=new sql.Request(conn)
+        queryBuyer.query(
+        `
+        select * from users.buyer where userName='${user.userName}'
+        `,(err,res)=>{
+            if(err)
+            {
+                console.log(err.message)
+               
+            }
+            else {
+                if(res.recordset.length!=0)
+                {
+                    console.log(res.recordset.length)
+                    response.send({"status":"success","type":"buyer"})
+                }
+              else{
+
+                let query=new sql.Request(conn)
+                query.query(
+                `
+                select * from users.renter where userName='${user.userName}'
+                `,(err,res)=>{
+                    if(err)
+                    {
+                        console.log(err.message)
+                        response.send({"status":"error"})
+                    }
+                    else {
+                        if(res.recordset.length!=0){
+                            console.log(res)
+                            response.send({"status":"success","type":"renter"})
+                        }
+                        else{
+                            response.send({"status":"userNotFound"})
+                        }
+                        
+                    }
+                });
+            }
+        }
+    })
+}
+
 
 module.exports = router;

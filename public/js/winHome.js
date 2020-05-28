@@ -20,10 +20,10 @@ const profilePic = document.forms['signUp'].ProfilePic
 
 const loginDiv = document.getElementById('login')
 const goToLogin = document.getElementById('goToLogin')
-const loginBtn=document.getElementById('loginBtn')
-const userNameLogin=document.getElementById('username')
-const passwordLogin=document.getElementById('password')
-const rememberMe=document.getElementById('rememberMe')
+const loginBtn = document.getElementById('loginBtn')
+const userNameLogin = document.getElementById('username')
+const passwordLogin = document.getElementById('password')
+const rememberMe = document.getElementById('rememberMe')
 // End of getting tags //
 
 
@@ -86,8 +86,14 @@ function getFormValues(event) {
 
         ableTosend = false;
         document.getElementById("4").style.display = "inline"
+    }else if(! /\d/.test(age.value))
+    {
+        ableTosend = false;
+        document.getElementById("4").innerHTML="please add your age in numbers "
+        document.getElementById("4").style.display = "inline"
     }
     else {
+     
         document.getElementById("4").style.display = "none"
     }
 
@@ -119,20 +125,27 @@ function getFormValues(event) {
     if (ableTosend) // law lesa b true 
     {
 
-        let pP = profilePic.files[0] ? profilePic.files[0].name : null
+        let pP = profilePic.files[0] ? profilePic.files[0].name : 'Avatar'
         let body = {
-            "name": name.value,
-            "phoneNumber": phoneNumber.value,
+            "userName": name.value,
+            "phone": phoneNumber.value,
             "email": email.value,
             "age": age.value,
             "gender": gender.value,
-            "role": role.value,
-            "job":job.value,
+            "user_role": role.value,
+            "job": job.value,
             "password": password.value,
-            "pP": pP
+            "photoName": pP
         }
         console.log(body)
-        sendDataToBackend(JSON.stringify(body), 'home/signUp',resetForm);
+        sendDataToBackend(JSON.stringify(body), 'home/signUp' ).then(res=>{
+            if(res.status='success')
+            {
+                setTimeout(showLogindiv, 3000);
+                
+            }
+        });
+        resetForm();
         if (profilePic.files[0]) {
             let formData = new FormData()
             formData.append('img', profilePic.files[0])
@@ -144,12 +157,15 @@ function getFormValues(event) {
 }
 
 
-function sendDataToBackend(body, path,cb) {
-    fetch('http://localhost:3000/' + path, { method: 'POST', body: body })
-        .then(response => {
-            cb();
+async function sendDataToBackend(body, path, cb) {
+    let response = await fetch('http://localhost:3000/' + path, { method: 'POST', body: body })
+        .then(res => {
+
+            return res;
         })
         .catch(error => { console.error(error) })
+    let data = await response.json()
+    return data
 }
 
 
@@ -160,37 +176,51 @@ function showLogindiv() {
     loginDiv.style.display = "block"
 }
 
-function userLogin(){
+function userLogin() {
     //remove error msg
     document.getElementById('errormsgloginUserName').style.display = "none"
     document.getElementById('errormsgloginPassword').style.display = "none"
     // prevent rerfesh of the page 
     event.preventDefault();
-    if(userNameLogin.value=="")
-    {
+    if (userNameLogin.value == "") {
         document.getElementById('errormsgloginUserName').style.display = "inline"
-    }else if (passwordLogin.value=="")
-    {
+    } else if (passwordLogin.value == "") {
         document.getElementById('errormsgloginPassword').style.display = "inline"
 
     }
     else {
 
-        let body={
-            "userName":userNameLogin.value,
-            "password":passwordLogin.value,
-            "rememberMe":rememberMe.checked
+        let body = {
+            "userName": userNameLogin.value,
+            "password": passwordLogin.value,
+            "rememberMe": rememberMe.checked
         };
-        let path='home/login';
-        sendDataToBackend(JSON.stringify(body), path,resetLoginForm); 
+        let path = 'home/login';
+        sendDataToBackend(JSON.stringify(body), path).then((res) => {
+            
+            if (res.type == 'buyer') {
+                location.replace("http://localhost:3000/customer.html")
+                resetLoginForm();
+            } else if (res.type == 'renter') {
+                location.replace("http://localhost:3000/renter.html")
+                resetLoginForm();
+            }else{
+                document.getElementById('notFound').style.display='block'
+            }
+
+        }).catch((err) => {
+            console.log(err)
+        });
+
     }
 
 }
 
-function resetLoginForm(){
-   userNameLogin.value=""
-   passwordLogin.value=""
-   rememberMe.checked=false;
+function resetLoginForm() {
+    userNameLogin.value = ""
+    passwordLogin.value = ""
+    rememberMe.checked = false;
+    document.getElementById('notFound').style.display='block'
 }
 
 
@@ -205,8 +235,8 @@ function resetForm() {
     repassword.value = ''
     profilePic.value = ''
     let genderBtn = document.getElementsByName("gender");
-    for(let i=0;i<genderBtn.length;i++)
-    genderBtn[i].checked = false;
+    for (let i = 0; i < genderBtn.length; i++)
+        genderBtn[i].checked = false;
 }
 
 function showSlides() {
@@ -243,7 +273,7 @@ signBtn.addEventListener('click', handleSignIn)
 HomePage.addEventListener('click', goToHome)
 addMember.addEventListener('click', getFormValues)
 goToLogin.addEventListener('click', showLogindiv)
-loginBtn.addEventListener('click',userLogin)
+loginBtn.addEventListener('click', userLogin)
 // End od assginement of EventListener to Tags //
 
 // start of calling functions that automtic runs in page load /
