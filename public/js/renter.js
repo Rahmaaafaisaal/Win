@@ -8,7 +8,7 @@ const roomPhotoInput    = document.getElementById('roomPhoto_r');
 const errorMsgDiv       = document.getElementById('errorMsg');
 const priceErrorMsg     = document.getElementById('roomPriceErrorMsg');
 const addingNewRoomBtn  = document.getElementById('addingNewRoomBtn');
-const noReqMsg          = document.getElementById("noReqMsg");
+const reqAcceptedTxt    = document.getElementById("reqAcceptedTxt");
 
 const dashboardBtn      = document.getElementById('dashboardBtn');
 const requestsBtn       = document.getElementById('requestsBtn');
@@ -22,7 +22,7 @@ const requestsPage      = document.getElementById("requestsDiv")
 const locationOptions = ["October","Fifth settlement","First settlement","El-Sheikh Zayed"]
 const furnOption      = ["Furnished","Unfurnished"]
 const typesOptions    = ["Single","Double","Triple"]
-
+let requestsList      = []
 /*******************Drop Down Menus Init*******************/
 locationOptions.forEach( (elem,index) => {
     let optn   = document.createElement("OPTION");
@@ -56,24 +56,24 @@ newRoomBtn.addEventListener("click",openNewRoomPage)
 
 /* navigation Functions */
 function openDashboardPage(){
-    roomCardsPage.style.visibility = "visible"; 
-    newRoomPage.style.visibility   = "hidden"
-    requestsPage.style.visibility  = "hidden"
+    roomCardsPage.hidden = false
+    newRoomPage.hidden   = true
+    requestsPage.hidden  = true
     getRenterRooms(1)
 }
 
 function openRequestsPage(){
-    roomCardsPage.style.visibility = "hidden"
-    newRoomPage.style.visibility   = "hidden"
-    requestsPage.style.visibility  = "visible"
-    displayRequests(requestsList)
+    roomCardsPage.hidden = true
+    newRoomPage.hidden   = true
+    requestsPage.hidden  = false
+    getRequests(1)
 }
 
 function openNewRoomPage(){
    
-    roomCardsPage.style.visibility = "hidden";
-    newRoomPage.style.visibility   = "visible"
-    requestsPage.style.visibility  = "hidden";
+    roomCardsPage.hidden = true;
+    newRoomPage.hidden   = false
+    requestsPage.hidden  = true;
 }
 
 /* New Room Page Functions*/
@@ -115,10 +115,10 @@ function getTheRoomData(e){
 
     if ( roomPriceMin < 0 || roomPriceMax < 1  || roomPriceMin > roomPriceMax)
     {
-        priceErrorMsg.style.visibility = "visible";
+        priceErrorMsg.hidden  = false;
         errorFlag = true ;
     }else{
-        priceErrorMsg.style.visibility = "hidden";
+        priceErrorMsg.hidden  = true;
     }
 
     if ( !roomPriceMin )
@@ -151,9 +151,9 @@ function getTheRoomData(e){
 
     if (errorFlag == true )
     {
-        errorMsgDiv.style.visibility = "visible";
+        errorMsgDiv.hidden  = false;
     }else {
-        errorMsgDiv.style.visibility = "hidden";
+        errorMsgDiv.hidden  = true;
         sendDataToServer(locationOptions[roomLocIndex],roomPriceMin , roomPriceMax ,typesOptions[roomTypeIndex],furnOption[roomFurnIndex],roomPhotosNames,roomPhotoInput.files)
     }
     return false
@@ -268,6 +268,26 @@ function displayRoom(rooms){
 }
 
 /********************Getting Renter Requests*******************************/
+function getRequests(renterId)
+{   
+    fetch(`http://localhost:3000/renter/req/${renterId}`,
+    {
+       method:"GET",
+       headers: {Accept: 'application/json'}
+    })
+    .then(function(res){ 
+      return res.json();
+    }).then ( res => {
+    if (res.status == "error" )
+    {
+        console.log("there is an Error happened")
+    }else{
+        requestsList = res.data
+        displayRequests(res.data)
+    }
+    })
+}
+
 function displayRequests(requests){
 
     let notifications = ''
@@ -275,19 +295,81 @@ function displayRequests(requests){
         requestsPage.innerHTML = ''
         for(req of requests){
             notifications += `<div class="col-sm-12">
-                    <div class="alert fade alert-simple alert-info alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
-                        <i class="start-icon  fa fa-info-circle faa-shake animated"></i>
-                        <strong class="font__weight-semibold"></strong> ${req.customerName} made a proposal for This <a href="">Room #${req.roomId}</a> with ${req.price}.
-                    </div>
-                </div>`
+                        <div class="alert fade alert-simple alert-info alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                            <i class="start-icon  fa fa-info-circle faa-shake animated"></i>
+                            <strong class="font__weight-semibold"></strong> ${req.customerName} made a proposal for This <a href="">Room #${req.roomId}</a> with ${req.price}.
+                            <div class="requestsBtns">
+                                <button type="button" class="btn btn-success" onclick="acceptRequest(${req.reqId})">Accept</button>
+                                <button type="button" class="btn btn-danger" onclick="declineRequest(${req.reqId})" >Decline</button>   
+                            </div>
+                            </div>
+                    </div>`
         }
         console.log(notifications)
         requestsPage.innerHTML = notifications
+    }else{
+        requestsPage.innerHTML = `<div class="col-sm-12">
+                            <div class="alert fade alert-simple alert-danger alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
+                            <i class="start-icon far fa-times-circle faa-pulse animated"></i>
+                            <strong class="font__weight-semibold"></strong> No requests found.
+                        </div>
+                    </div>`
     }
+}
+
+function acceptRequest(reqId)
+{
+    
+    fetch(`http://localhost:3000/renter/req/accept/${reqId}`,
+    {
+       method:"GET",
+       headers: {Accept: 'application/json'}
+    })
+    .then(function(res){ 
+      return res.json();
+    }).then ( res => {
+        if (res.status == "error" )
+        {
+            console.log("there is an Error happened")
+        }else{
+            const reqDetails = res.body;
+            console.log("room accepted")
+            reqAcceptedTxt.innerHTML = `<p>You accepted ${reqDetails.customerName}'s request to Room #${reqDetails.roomId} 
+                                        and your details sent to him/her.</p>`
+            $('#exampleModal').modal('show');
+        }
+    })
+}
+
+function declineRequest(reqId)
+{
+    console.log(reqId)
+    fetch(`http://localhost:3000/renter/req/decline/${reqId}`,
+    {
+       method:"GET",
+       headers: {Accept: 'application/json'}
+    })
+    .then(function(res){ 
+      return res.json();
+    }).then ( res => {
+        if (res.status == "error" )
+        {
+            console.log("there is an Error happened")
+        }else{
+            console.log("room declined")
+            
+            requestsList = requestsList.filter( (req) =>{
+                if(req.reqId != reqId )
+                {
+                    return true
+                }
+            })
+            console.log(requestsList.length)
+            displayRequests(requestsList)
+        }
+    })
 }
 /*******************Entry Point************************* */
 openDashboardPage()
 
-let requestsList = [ {customerName:"rahma", customerId :2, roomId:1,price:2000},
-                    {customerName:"karim", customerId :1, roomId:2,price:1000} ]
 
