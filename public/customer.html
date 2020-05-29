@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/card.css">
   <link rel="stylesheet" href="css/requests.css">
   <link rel="stylesheet" href="css/modalRoomDetials.css">
+  <link rel="stylesheet" href="css/profile.css">
   <!--  end of including custom css-->
 </head>
 
@@ -39,7 +40,7 @@
     <a href="#" id="dashboardBtnCustomer" class="list-group-item list-group-item-action bg-light">Dashboard</a>
     <a href="#" id="requestsBtnCustomer"  class="list-group-item list-group-item-action bg-light">Requested</a>
     <a href="#" id="notificationBtnCustomer"  class="list-group-item list-group-item-action bg-light">Notifications</a>
-    
+    <a href="#" id="profileBtnCustomer"  class="list-group-item list-group-item-action bg-light">Profile</a>
     </div>
 </div>
 
@@ -71,10 +72,8 @@
 
 
   <!-- start of profile div -->
-  <div id="profile">
-    <!-- end of profile div -->
 
-  </div>
+    <!-- end of profile div -->
   <div class="modal fade " id="roomDetials" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog customModal" role="document">
       <div class="modal-content ">
@@ -91,6 +90,104 @@
       </div>
     </div>
   </div>
+</div>
+
+</div>
+
+
+<div id="profileDiv"  hidden="true">
+  <div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4 ">
+                <div class="profile-img ">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+                        alt="" />
+                    <!-- <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file" text="Change Photo" />
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        ahmed ali
+                    </h5>
+
+                    <p class="proile-rating">Customer</p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">Information</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-8 marginTop">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>User Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>ahmed</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>age</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>22</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>kshitighelani@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>123 456 7890</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Job</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Web Developer and Designer</p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Gender</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Male</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </form>
 </div>
 </div>
   <!-- start of including javascript -->

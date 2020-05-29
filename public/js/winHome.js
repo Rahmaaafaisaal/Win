@@ -50,6 +50,14 @@ function handleSignIn() {
 }
 
 
+// function to hide all
+function hideAll() {
+    loginDiv.style.display = "none"
+    welcomeDiv.style.display = "none"
+
+    registrationDiv.style.display = "none"
+}
+
 // adding new member send data to backend to save it  on click of submit button in sign Up form //
 function getFormValues(event) {
 
@@ -86,14 +94,13 @@ function getFormValues(event) {
 
         ableTosend = false;
         document.getElementById("4").style.display = "inline"
-    }else if(! /\d/.test(age.value))
-    {
+    } else if (! /\d/.test(age.value)) {
         ableTosend = false;
-        document.getElementById("4").innerHTML="please add your age in numbers "
+        document.getElementById("4").innerHTML = "please add your age in numbers "
         document.getElementById("4").style.display = "inline"
     }
     else {
-     
+
         document.getElementById("4").style.display = "none"
     }
 
@@ -138,11 +145,17 @@ function getFormValues(event) {
             "photoName": pP
         }
         console.log(body)
-        sendDataToBackend(JSON.stringify(body), 'home/signUp' ).then(res=>{
-            if(res.status='success')
-            {
-                setTimeout(showLogindiv, 3000);
-                
+        sendDataToBackend(JSON.stringify(body), 'home/signUp').then(res => {
+            if (res.status = 'success') {
+                hideAll();
+                document.getElementById('loading').style.display = 'block'
+                setTimeout(function () {
+
+                    document.getElementById('loading').style.display = 'none'
+                    showLogindiv()
+
+                }, 3000);
+
             }
         });
         resetForm();
@@ -197,15 +210,15 @@ function userLogin() {
         };
         let path = 'home/login';
         sendDataToBackend(JSON.stringify(body), path).then((res) => {
-            
+            document.getElementById('notFound').style.display = 'none'
             if (res.type == 'buyer') {
                 location.replace("http://localhost:3000/customer.html")
                 resetLoginForm();
             } else if (res.type == 'renter') {
                 location.replace("http://localhost:3000/renter.html")
                 resetLoginForm();
-            }else{
-                document.getElementById('notFound').style.display='block'
+            } else {
+                document.getElementById('notFound').style.display = 'block'
             }
 
         }).catch((err) => {
@@ -220,7 +233,7 @@ function resetLoginForm() {
     userNameLogin.value = ""
     passwordLogin.value = ""
     rememberMe.checked = false;
-    document.getElementById('notFound').style.display='block'
+    document.getElementById('notFound').style.display = 'block'
 }
 
 
