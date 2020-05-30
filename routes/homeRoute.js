@@ -81,8 +81,13 @@ async function checkUser(user,response)
             else {
                 if(res.recordset.length!=0)
                 {
-                    console.log(res.recordset.length)
-                    response.send({"status":"success","type":"buyer"})
+                    if(res.recordset[0]==user.password)
+                    {
+                        response.send({"status":"success","type":"buyer"})
+                    }
+                   else{
+                    response.send({"status":"error"})
+                   }
                 }
               else{
 
@@ -91,6 +96,7 @@ async function checkUser(user,response)
                 `
                 select * from users.renter where userName='${user.userName}'
                 `,(err,res)=>{
+                    console.log(res)
                     if(err)
                     {
                         console.log(err.message)
@@ -98,8 +104,13 @@ async function checkUser(user,response)
                     }
                     else {
                         if(res.recordset.length!=0){
-                            console.log(res)
-                            response.send({"status":"success","type":"renter"})
+                           if(res.recordset[0]==user.password)
+                            {
+                                response.send({"status":"success","type":"buyer"})
+                            }
+                           else{
+                            response.send({"status":"error"})
+                           }
                         }
                         else{
                             response.send({"status":"userNotFound"})
