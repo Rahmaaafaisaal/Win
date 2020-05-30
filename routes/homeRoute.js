@@ -30,7 +30,7 @@ async function addBuyer(buyerInfo,response) {
         let query=new sql.Request(conn)
         query.query(
         `
-        insert into users.buyer (age,photoName,gender,userName,phone,user_role,email,job,password) values (${buyerInfo.age},'${buyerInfo.photoName}','${buyerInfo.gender}','${buyerInfo.userName}','${buyerInfo.phone}','${buyerInfo.user_role}','${buyerInfo.email}','${buyerInfo.job}','${buyerInfo.password}')
+        insert into users.buyer (age,photoName,gender,userName,phone,userRole,email,job,password) values (${buyerInfo.age},'${buyerInfo.photoName}','${buyerInfo.gender}','${buyerInfo.userName}','${buyerInfo.phone}','${buyerInfo.user_role}','${buyerInfo.email}','${buyerInfo.job}','${buyerInfo.password}')
         `,(err,res)=>{
             if(err)
             {
@@ -52,7 +52,7 @@ async function addRenter(renterInfo,response) {
         let query=new sql.Request(conn)
         query.query(
         `
-        insert into users.renter (age,photoName,gender,userName,phone,user_role,email,job,password) values (${renterInfo.age},'${renterInfo.photoName}','${renterInfo.gender}','${renterInfo.userName}','${renterInfo.phone}','${renterInfo.user_role}','${renterInfo.email}','${renterInfo.job}','${renterInfo.password}')
+        insert into users.renter (age,photoName,gender,userName,phone,userRole,email,job,password) values (${renterInfo.age},'${renterInfo.photoName}','${renterInfo.gender}','${renterInfo.userName}','${renterInfo.phone}','${renterInfo.user_role}','${renterInfo.email}','${renterInfo.job}','${renterInfo.password}')
         `,(err,res)=>{
             if(err)
             {

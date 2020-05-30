@@ -5,8 +5,10 @@ const roomPriceMaxInput = document.getElementById('roomPriceMax_r');
 const roomTypeInput     = document.getElementById('roomType_r');
 const roomFurnInput     = document.getElementById('roomFurn_r');
 const roomPhotoInput    = document.getElementById('roomPhoto_r');
+const roomDateInput     = document.getElementById('roomDate_r');
 const errorMsgDiv       = document.getElementById('errorMsg');
 const priceErrorMsg     = document.getElementById('roomPriceErrorMsg');
+const dateErrorMsg      = document.getElementById('roomDateErrorMsg');
 const addingNewRoomBtn  = document.getElementById('addingNewRoomBtn');
 const reqAcceptedTxt    = document.getElementById("reqAcceptedTxt");
 
@@ -82,11 +84,14 @@ function getTheRoomData(e){
     let roomLocIndex     = roomLocInput.value ;
     let roomTypeIndex    = roomTypeInput.value ;
     let roomFurnIndex    = roomFurnInput.value ; 
-    let roomPriceMin     = roomPriceMinInput.value ; 
-    let roomPriceMax     = roomPriceMaxInput.value ; 
+    let roomPriceMin     = parseInt(roomPriceMinInput.value); 
+    let roomPriceMax     = parseInt(roomPriceMaxInput.value); 
+    let roomDate         = roomDateInput.value ;  
     let errorFlag        = false;
     let roomPhotosNames  = []
-
+    
+    let roomAvailableDate = Date.parse(roomDate);
+    let today             = new Date();
 
     /* Check the Input elements and handle erros */
     if (roomLocIndex == -1 )
@@ -137,6 +142,22 @@ function getTheRoomData(e){
         roomPriceMaxInput.style.borderColor = "grey";
     }
 
+    if(!roomDate)
+    {
+        roomDateInput.style.borderColor = "red";
+        errorFlag = true ;
+    }else{
+        roomDateInput.style.borderColor = "grey";
+    }
+
+    if (roomAvailableDate <today.getTime() )
+    {
+        dateErrorMsg.hidden  = false;
+        errorFlag = true ;
+    }else{
+        dateErrorMsg.hidden  = true;
+    }
+
     if ( !roomPhotoInput.files[0] )
     {
         roomPhotoInput.style.color = "red";
@@ -154,7 +175,7 @@ function getTheRoomData(e){
         errorMsgDiv.hidden  = false;
     }else {
         errorMsgDiv.hidden  = true;
-        sendDataToServer(locationOptions[roomLocIndex],roomPriceMin , roomPriceMax ,typesOptions[roomTypeIndex],furnOption[roomFurnIndex],roomPhotosNames,roomPhotoInput.files)
+        sendDataToServer(1,locationOptions[roomLocIndex],roomPriceMin , roomPriceMax ,typesOptions[roomTypeIndex],furnOption[roomFurnIndex],roomPhotosNames,roomDate,roomPhotoInput.files)
     }
     return false
 }
@@ -177,7 +198,7 @@ async function uploadImage(images){
 
 
 /* send the Data to the Server */
-async function sendDataToServer(location,priceMin,priceMax,type,furniture,roomPhotosNames,roomPhotos)
+async function sendDataToServer(renterId,location,priceMin,priceMax,type,furniture,roomPhotosNames,roomDate,roomPhotos)
 {
 
     let imageRes = await uploadImage(roomPhotos) 
@@ -189,10 +210,11 @@ async function sendDataToServer(location,priceMin,priceMax,type,furniture,roomPh
         "priceMax"   : priceMax,
         "type"       : type,
         "furniture"  : furniture,
+        "date"       : roomDate,
         "roomImages" : roomPhotosNames
     }
 
-    fetch('http://localhost:3000/renter/room',
+    fetch(`http://localhost:3000/renter/room/${renterId}`,
     {
        method:"POST",
        headers: {Accept: 'application/json'},
@@ -258,7 +280,7 @@ function displayRoom(rooms){
         cards += `<a class="carousel-control-next" href="#roomCarousel${index}" role="button" data-slide="next">`
         cards += '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>'
         cards += `<div class="col-md-8"><div class="card-body"><h5 class="card-title">Room #${room.roomId}</h5><p class="card-text">`
-        cards += `<p>Location : ${room.location} </p><p>Price : from ${room.priceMin} to ${room.priceMax}</p><p> Furniture status : ${room.furniture}</p>`
+        cards += `<p>Location : ${room.roomLocation} </p><p>Price : from ${room.minRange} to ${room.maxRange}</p><p> Furniture status : ${room.furnitureStatus}</p>`
         cards += '</p></div></div></div></div></div>'
         
         roomCardsPage.innerHTML += cards
@@ -297,7 +319,7 @@ function displayRequests(requests){
             notifications += `<div class="col-sm-12">
                         <div class="alert fade alert-simple alert-info alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show" role="alert" data-brk-library="component__alert">
                             <i class="start-icon  fa fa-info-circle faa-shake animated"></i>
-                            <strong class="font__weight-semibold"></strong> ${req.customerName} made a proposal for This <a href="">Room #${req.roomId}</a> with ${req.price}.
+                            <strong class="font__weight-semibold"></strong> ${req.customerName} made a proposal for This <a href="">Room #${req.roomId_FK}</a> with ${req.price}.
                             <div class="requestsBtns">
                                 <button type="button" class="btn btn-success" onclick="acceptRequest(${req.reqId})">Accept</button>
                                 <button type="button" class="btn btn-danger" onclick="declineRequest(${req.reqId})" >Decline</button>   
@@ -305,7 +327,6 @@ function displayRequests(requests){
                             </div>
                     </div>`
         }
-        console.log(notifications)
         requestsPage.innerHTML = notifications
     }else{
         requestsPage.innerHTML = `<div class="col-sm-12">
@@ -371,5 +392,3 @@ function declineRequest(reqId)
 }
 /*******************Entry Point************************* */
 openDashboardPage()
-
-

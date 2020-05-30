@@ -1,6 +1,8 @@
 const express = require('express');
 const router  = express.Router();
 const multer  = require('multer')
+const conn = require('../dbConnection');
+const sql=require('mssql');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -13,6 +15,55 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+function addRoomPhotos(roomPhotos,roomId)
+{
+  for(photoName of roomPhotos){
+    try {   
+      let query=new sql.Request(conn)
+      query.query(
+      `
+      insert into users.room_photosNames (roomId,photoName) values (${roomId},'${photoName}')
+      `,(err,result)=>{
+          if(err)
+          {
+              console.log(err.message)
+              return false
+          }
+      });
+    } catch (err) {
+      console.log(err)
+      return false
+    }
+  }
+  return true
+}
+
+function getRoomPhotos(roomId)
+{
+  try {   
+    let query=new sql.Request(conn)
+    return query.query(
+    `select photoName from users.room_photosNames where roomId = ${roomId}` )
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+  
+}
+  
+function getCustName(custId)
+{
+  try {   
+    let query=new sql.Request(conn)
+    return query.query(
+    `select userName from users.buyer where buyerId = ${custId}` )
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+  
+}
+
 router.post("/img",upload.array('img',4),(req,res) =>
 {
   if (req.files) {
@@ -22,65 +73,77 @@ router.post("/img",upload.array('img',4),(req,res) =>
   else res.send({"status":"error"})
 })
 
-router.post("/room", (req,res) =>
+router.post("/room/:id", (req,res) =>
 {
   let newRoom=req.body;
+  const renterId = req.params.id;
   console.log(newRoom)
-  res.send({"status":"success"})
+
+  try {
+        
+    let query=new sql.Request(conn)
+    query.query(
+    `
+    insert into users.room (minRange,maxRange,roomLocation,furnitureStatus,roomType,avaliableFrom,renterId) values (${newRoom.priceMin},'${newRoom.priceMax}','${newRoom.location}','${newRoom.furniture}','${newRoom.type}','${newRoom.date}',${renterId})
+    SELECT SCOPE_IDENTITY() AS roomId;
+    `,(err,result)=>{
+        if(err)
+        {
+            console.log(err.message)
+            res.send({"status":"error"})
+        }
+        else{
+          let savedRoomId = result.recordset[0].roomId 
+          const ret = addRoomPhotos(newRoom.roomImages,savedRoomId)
+          if(ret == true ){
+            res.send({"status":"success"})
+          }  
+        } 
+    });
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 router.get("/rooms/:id",(req,res)=>{
-  renterList = [{"id":1 , "rooms":[{ roomId : 1 ,
-    location: 'First settlement',
-  priceMin: '321',
-  priceMax: '321',
-  type: 'Double',
-  furniture: 'Furnished',
-  roomImages:
-   [ '1.jpeg', '2.jpeg' ,'3.jpeg'] } ,
-   {roomId : 2 ,
-   location: 'Fifth settlement',
-     priceMin: '25',
-     priceMax: '250',
-     type: 'Double',
-     furniture: 'Furnished',
-     roomImages:
-      [ '4.jpeg',
-        '5.jpeg' ] } ,{ roomId :3 ,
-          location: 'First settlement',
-        priceMin: '321',
-        priceMax: '321',
-        type: 'Double',
-        furniture: 'Furnished',
-        roomImages:
-         [ '6.jpeg',
-           '3.jpeg' ] },
-           { roomId : 4 ,
-            location: 'First settlement',
-           priceMin: '321',
-           priceMax: '321',
-           type: 'Double',
-           furniture: 'Furnished',
-           roomImages:
-            [ '2.jpeg',
-              '1.jpeg' ] } ]}]
-
-  const renterId = req.params.id;
-  for(renter of renterList){
-      if( renter.id ==  renterId){
-          renter.rooms.forEach(room =>{
-          room.roomImages.map( (image,i) =>{
-          room.roomImages[i] = "img/roomPics/" + image
-           })
-        })
-      // res.setHeader('Content-Type', 'application/json');
-      res.send({ "status":"success", "data":renter.rooms })
-      return 
-    }
-  }
-  // if the loop ended without responsing to the frontend, which means the renter is not existed, send error
-  res.json({"status":"error"})
   
+  const renterId = req.params.id;
+  let roomsList = [ ]
+  try {   
+    let query=new sql.Request(conn)
+    query.query(
+    `
+    select * from users.room where renterId = ${renterId}
+    `,(err,result)=>{
+        if(err)
+        {
+            console.log(err.message)
+            res.json({"status":"error"})
+        }else{
+          const roomsLen = result.recordset.length
+          result.recordset.forEach(async(room,index) =>{
+            room.roomImages = []
+            let ret = await getRoomPhotos(room.roomId)
+            if(ret.err)
+            {
+              console.log(ret.err.message)
+              return false
+            }else{
+              ret.recordset.forEach( record =>{
+                room.roomImages.push("img/roomPics/"+record.photoName)
+              }) 
+              roomsList.push(room)
+            }
+            if(index == roomsLen - 1){
+              res.send({ "status":"success", "data": roomsList })
+              return
+            }
+        });
+    }});
+  } catch (err) {
+    console.log(err)
+    res.json({"status":"error"})
+  }
 })
 
 
@@ -90,15 +153,41 @@ router.get("/req/:id",(req,res)=>{
                                         {customerName:"ahmed", customerId :4, roomId:2, price:3000, reqId:3}  ]}]
 
   const renterId = req.params.id;
-  for(renter of renterList){
-      if( renter.id ==  renterId){
-     
-      res.send({ "status":"success", "data":renter.requests })
-      return 
-    }
+  let reqList = [ ]
+  try {   
+    let query=new sql.Request(conn)
+    query.query(
+    `
+    select * from users.request where renterId_FK = ${renterId}
+    `,(err,result)=>{
+        if(err)
+        {
+            console.log(err.message)
+            res.json({"status":"error"})
+        }else{
+          const requestsLen = result.recordset.length
+          result.recordset.forEach(async(elem,index) =>{
+           
+            let ret = await getCustName(elem.buyerId_FK)
+            if(ret.err)
+            {
+              console.log(ret.err.message)
+              return false
+            }else{
+              elem.customerName = ret.recordset[0].userName
+              console.log(elem)
+              reqList.push(elem)
+            }
+            if(index == requestsLen - 1){
+              res.send({ "status":"success", "data": reqList })
+              return
+            }
+        });
+    }});
+  } catch (err) {
+    console.log(err)
+    res.json({"status":"error"})
   }
-  // if the loop ended without responsing to the frontend, which means the renter is not existed, send error
-  res.json({"status":"error"})
   
 })
 
