@@ -50,7 +50,7 @@ function getRoomPhotos(roomId)
   }
   
 }
-  
+
 function getCustName(custId)
 {
   try {   
@@ -64,6 +64,56 @@ function getCustName(custId)
   
 }
 
+function deleteOtherRequests(roomId)
+{
+  try {   
+    let query=new sql.Request(conn)
+    return query.query(
+    `
+    DELETE FROM users.request where roomId_FK = ${roomId} and requestStatus = 'pending' `);
+  } catch (err) {
+    console.log(err)
+    return false
+  }
+}
+
+function getAllRenterRequests(renterId,res)
+{
+  let reqList = [ ]
+  try {   
+    let query=new sql.Request(conn)
+    query.query(
+    `
+    select * from users.request where renterId_FK = ${renterId}
+    `,(err,result)=>{
+        if(err)
+        {
+            console.log(err.message)
+            res.json({"status":"error"})
+        }else{
+          const requestsLen = result.recordset.length
+          result.recordset.forEach(async(elem,index) =>{
+           
+            let ret = await getCustName(elem.buyerId_FK)
+            if(ret.err)
+            {
+              console.log(ret.err.message)
+              return false
+            }else{
+              elem.customerName = ret.recordset[0].userName
+              reqList.push(elem)
+            }
+            if(index == requestsLen - 1){
+              res.send({ "status":"success", "data": reqList })
+              return
+            }
+        });
+    }});
+  } catch (err) {
+    console.log(err)
+    res.json({"status":"error"})
+  }
+}
 router.post("/img",upload.array('img',4),(req,res) =>
 {
   if (req.files) {
@@ -148,46 +198,9 @@ router.get("/rooms/:id",(req,res)=>{
 
 
 router.get("/req/:id",(req,res)=>{
-  renterList = [{"id":1 , "requests": [ {customerName:"rahma", customerId :2, roomId:1, price:2000, reqId:1},
-                                        {customerName:"karim", customerId :1, roomId:2, price:1000, reqId:2},
-                                        {customerName:"ahmed", customerId :4, roomId:2, price:3000, reqId:3}  ]}]
 
   const renterId = req.params.id;
-  let reqList = [ ]
-  try {   
-    let query=new sql.Request(conn)
-    query.query(
-    `
-    select * from users.request where renterId_FK = ${renterId}
-    `,(err,result)=>{
-        if(err)
-        {
-            console.log(err.message)
-            res.json({"status":"error"})
-        }else{
-          const requestsLen = result.recordset.length
-          result.recordset.forEach(async(elem,index) =>{
-           
-            let ret = await getCustName(elem.buyerId_FK)
-            if(ret.err)
-            {
-              console.log(ret.err.message)
-              return false
-            }else{
-              elem.customerName = ret.recordset[0].userName
-              console.log(elem)
-              reqList.push(elem)
-            }
-            if(index == requestsLen - 1){
-              res.send({ "status":"success", "data": reqList })
-              return
-            }
-        });
-    }});
-  } catch (err) {
-    console.log(err)
-    res.json({"status":"error"})
-  }
+  getAllRenterRequests(renterId,res)
   
 })
 
@@ -197,21 +210,58 @@ router.get("/req/accept/:id",(req,res)=>{
     //query the request and accept it 
     // delete other requests for this room
     //direct to  "/req/:id" => id is the renter id 
-    console.log(reqId)
-    res.send({ "status":"success" ,body :{customerName:"ahmed", customerId :4, roomId:2, price:3000, reqId:3} })
-  // res.json({"status":"error"})
+   
+    try {   
+      let query=new sql.Request(conn)
+      query.query(
+      `
+      UPDATE users.request SET requestStatus = 'accepted' where reqId = ${reqId};
+      SELECT * From users.request where reqId = ${reqId};
+      `,async (err,result)=>{
+          if(err)
+          {
+            console.log(err.message)
+            res.json({"status":"error"})
+          }else{
+            let savedRoomId = result.recordset[0].roomId_FK
+            let renterId    = result.recordset[0].renterId_FK
+            let ret = await deleteOtherRequests(savedRoomId)
+            if(! ret.err){
+              console.log("other requests deleted")
+              getAllRenterRequests(renterId,res)
+            }
+          }
+      });
+    } catch (err) {
+      console.log(err)
+      res.json({"status":"error"})
+    }
   
 })
 
 
 router.get("/req/decline/:id",(req,res)=>{
   const reqId = req.params.id;
-  //query the request and delete it 
-  console.log(reqId)
-  res.send({ "status":"success" })
-  
-  // res.json({"status":"error"})
-  
+  try {
+        
+    let query=new sql.Request(conn)
+    query.query(
+    `
+    DELETE FROM users.request WHERE reqId = ${reqId}
+    `,(err,result)=>{
+        if(err)
+        {
+            console.log(err.message)
+            res.send({"status":"error"})
+        }
+        else{
+            res.send({"status":"success"})
+        } 
+    });
+  } catch (err) {
+    console.log(err)
+    res.send({"status":"error"})
+  }
 })
 
 module.exports = router;

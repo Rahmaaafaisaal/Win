@@ -353,11 +353,19 @@ function acceptRequest(reqId)
         {
             console.log("there is an Error happened")
         }else{
-            const reqDetails = res.body;
-            console.log("room accepted")
-            reqAcceptedTxt.innerHTML = `<p>You accepted ${reqDetails.customerName}'s request to Room #${reqDetails.roomId} 
+            let reqDetails = {}
+            for(elem of requestsList)
+            {
+                if(elem['reqId'] == reqId)
+                {
+                    reqDetails=elem
+                }
+            }
+            reqAcceptedTxt.innerHTML = `<p>You accepted ${reqDetails.customerName}'s request to Room #${reqDetails.roomId_FK} 
                                         and your details sent to him/her.</p>`
             $('#exampleModal').modal('show');
+            requestsList = res.data
+            displayRequests(res.data)
         }
     })
 }
@@ -377,15 +385,12 @@ function declineRequest(reqId)
         {
             console.log("there is an Error happened")
         }else{
-            console.log("room declined")
-            
             requestsList = requestsList.filter( (req) =>{
                 if(req.reqId != reqId )
                 {
                     return true
                 }
             })
-            console.log(requestsList.length)
             displayRequests(requestsList)
         }
     })
