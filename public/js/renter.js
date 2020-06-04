@@ -396,4 +396,6 @@ function declineRequest(reqId)
     })
 }
 /*******************Entry Point************************* */
+
+checkIfloggedIn()
 openDashboardPage()

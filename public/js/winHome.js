@@ -211,12 +211,17 @@ function userLogin() {
         let path = 'home/login';
         sendDataToBackend(JSON.stringify(body), path).then((res) => {
             document.getElementById('notFound').style.display = 'none'
-            if (res.type == 'buyer') {
+            console.log(res)
+            if (res.user.userRole == 'Buyer') {
+                resetLoginForm();
+                setLoggedInUser(res);
                 location.replace("http://localhost:3000/customer.html")
+               
+            } else if (res.user.userRole == 'Seller') {
+                setLoggedInUser(res);
                 resetLoginForm();
-            } else if (res.type == 'renter') {
                 location.replace("http://localhost:3000/renter.html")
-                resetLoginForm();
+                
             } else {
                 document.getElementById('notFound').style.display = 'block'
             }

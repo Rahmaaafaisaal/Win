@@ -5,7 +5,7 @@ function displayRoom(rooms,div,isRenter){
         cards = '<div class="cardDiv card mb-3" style="width: 540px;"><div class="row no-gutters">'
         cards += `<div id="roomCarousel${index}" class=" carousel slide" data-ride="carousel">`
         cards += '<div class="carousel-inner">'
-        room.images.forEach( (image, i)=>{
+        room.roomImages.forEach( (image, i)=>{
             
             cards += '<div class="carousel-item cardImgDiv'
             if (i == 0 )
@@ -20,7 +20,7 @@ function displayRoom(rooms,div,isRenter){
         cards += `<a class="carousel-control-next" href="#roomCarousel${index}" role="button" data-slide="next">`
         cards += '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>'
         cards += `<div ><div class="card-body"><p class="card-text">`
-        cards += `<p>Location : ${room.location} </p><p>Price : from ${room.priceMin} to ${room.priceMax}</p><p> Furniture status : ${room.furniture}</p>`
+        cards += `<p>Location : ${room.roomLocation} </p><p>Price : from ${room.minRange} to ${room.maxRange}</p><p> Furniture status : ${room.furnitureStatus}</p>`
         cards+='<button type="button" class="btn btn-success">Request</button>'
         let modalRoom=JSON.stringify(room)
         cards += `</p></div></div><p style="font-size:10px; margin-left:37%" onclick='showRoomDetials(${modalRoom})'><a href="#">more ...</a></p></div></div></div>`
@@ -30,10 +30,11 @@ function displayRoom(rooms,div,isRenter){
 
 function displayRequestedRooms(rooms,div){
     div.innerHTML=''
+    rooms=rooms= [ {"text":"room1", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room2", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room2", "images":['img/1.jpg',"img/2.jpg"] },{"text":"room2", "images":['img/1.jpg',"img/2.jpg"] }  ]
     rooms.forEach( (room)=>{
         cards = '<div class="cardDiv card mb-3" style="width: 540px;"><div class="row no-gutters">'
         cards += `<div ><div class="card-body"><p class="card-text">`
-        cards += `<p>Location : ${room.location} </p><p>Price : from ${room.priceMin} to ${room.priceMax}</p><p> Furniture status : ${room.furniture}</p>`
+        cards += `<p>Location : ${room.roomLocation} </p><p>Price : from ${room.minRange} to ${room.maxRange}</p><p> Furniture status : ${room.furnitureStatus}</p>`
         cards+='<button type="button" class="btn btn-danger">Decline</button>'
         cards += `</p></div></div></div></div></div>`
         div.innerHTML += cards

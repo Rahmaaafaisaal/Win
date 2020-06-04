@@ -73,6 +73,7 @@ async function checkUser(user,response)
         `
         select * from users.buyer where userName='${user.userName}'
         `,(err,res)=>{
+            console.log(res)
             if(err)
             {
                 console.log(err.message)
@@ -81,9 +82,10 @@ async function checkUser(user,response)
             else {
                 if(res.recordset.length!=0)
                 {
-                    if(res.recordset[0]==user.password)
+                    console.log("hena")
+                    if(res.recordset[0].password==user.password)
                     {
-                        response.send({"status":"success","type":"buyer"})
+                        response.send({"status":"success","user":res.recordset[0]})
                     }
                    else{
                     response.send({"status":"error"})
@@ -104,9 +106,9 @@ async function checkUser(user,response)
                     }
                     else {
                         if(res.recordset.length!=0){
-                           if(res.recordset[0]==user.password)
+                           if(res.recordset[0].password==user.password)
                             {
-                                response.send({"status":"success","type":"buyer"})
+                                response.send({"status":"success","user":res.recordset[0]})
                             }
                            else{
                             response.send({"status":"error"})

@@ -10,7 +10,7 @@ function showRoomDetials(card) {
     <div class="carousel-inner">`
 
 
-    card.images.forEach( (image, i)=>{
+    card.roomImages.forEach( (image, i)=>{
         
         roomDetails += '<div class="carousel-item cardImgDiv'
         if (i == 0 )
@@ -25,11 +25,12 @@ function showRoomDetials(card) {
     roomDetails += `<a class="carousel-control-next" href="#roomCarousel" role="button" data-slide="next">`
     roomDetails += '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>'
     roomDetails += `<p></p>
-    <p>Location : ${card.location} </p>
-    <p>Price : from ${card.priceMin} to ${card.priceMax}</p>
-    <p> Furniture status : ${card.furniture}</p>
+    <p>Location : ${card.roomLocation} </p>
+    <p>Price : from ${card.minRange} to ${card.maxRange}</p>
+    <p> Furniture status : ${card.furnitureStatus}</p>
+    <p>Room type : ${card.roomType} </p>
     <p> preferd gender : ${card.gender}</p>
-    <p> Avaliable From : ${card.Avaliable_From}</p>
+    <p> Avaliable From : ${card.avaliableFrom}</p>
     ` 
     modalRoomDetailsBody.innerHTML=roomDetails;
     $('#roomDetials').modal({

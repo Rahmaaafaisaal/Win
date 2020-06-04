@@ -1,3 +1,4 @@
+checkIfloggedIn()
 async function getRoomsFromBackend(path) {
     
 let rooms= await fetch('http://localhost:3000/' + path)
@@ -23,7 +24,8 @@ function getRequestedRooms(div) {
 
 
 getRoomsFromBackend('customer/rooms').then((data)=>{
-    displayRoom(data,roomsDiv,false)
+    console.log(data.data)
+    displayRoom(data.data,roomsDiv,false)
 })
 
 
